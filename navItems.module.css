@@ -1,0 +1,14 @@
+.navItems {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    box-sizing: border-box;
+    margin-top: 0;
+    
+}
+
+li {
+    list-style-type: none;
+}

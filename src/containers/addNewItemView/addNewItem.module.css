@@ -1,0 +1,236 @@
+.wrapper {
+    z-index: 90;
+    height: 100vh;
+    width: 100%;
+    position: fixed;
+    background: linear-gradient(rgb(240,240,240), rgb(255, 253, 253), rgb(202, 201, 201));
+    top: 80px;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.frame1 {
+    border: 1px solid#ccc;
+    width: 50%;
+    height: 77%;
+    padding: 20px;
+    border-radius: 7px;
+    margin-bottom: 20px;
+}
+
+.inputDiv {
+    width: 99%;
+    margin: 5px auto;
+    border-bottom: 1px solid #ccc;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.inputDiv img {
+    width: 30px;
+    height: 30px;
+    margin: 5px;
+}
+
+.inputDiv input {
+    height: 45px;
+    width: 90%;
+    border: none;
+    font-size: 20px;
+    background-color: transparent;
+    /* color: rgb(154, 150, 150); */
+}
+ ::placeholder {
+    color: rgb(155, 150, 150);
+    font-weight: stretch;
+ }
+
+ .inputDiv input:focus {
+    /* border: none; */
+    outline: none;
+    background-color: rgb(251, 249, 249);
+    box-shadow: 0 0 3px 1px rgb(246, 244, 244);
+    margin: 1px;
+ }
+
+ .dropdown {
+    width: 100%;
+    height: 45px;
+    border: none;
+    /* background-color: rgb(240, 237, 237); */
+    font-size: 17px;
+    box-shadow: 0 1px 1px 0.3px rgb(228, 227, 227);
+    color: rgb(47, 46, 46);
+    font-weight: 400;
+    padding: 5px 15px;
+    margin: 10px 0;
+    border-radius: 7px;
+ }
+
+ .dropdown:focus {
+    outline: none;
+ }
+
+ .uploadDiv {
+    width: 100%;
+    height: 400px;
+    border: 1px solid #ccc;
+    border-radius: 7px;
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    align-items: center;
+    margin: 10px 0;
+ }
+
+ .uploadDiv img {
+    width: 50px;
+    height: 40px;
+ }
+
+ .uploadDiv h3 {
+    color: rgb(71,74,85);
+    font-size: 17px;
+    font-weight: 500;
+ }
+
+ .detailsDiv {
+    width: 100%;
+    height: 50px;
+    /* border: 1px solid #ccc; */
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    align-items: center;
+ }
+
+ .detailsDiv div {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    align-items: center;
+    flex-basis: 49%;
+    border-bottom: 1px solid #ccc;
+    box-sizing: border-box;
+ }
+
+ .detailsDiv div img {
+    width: 20px;
+    height: 20px;
+    margin: 2px 10px;
+ }
+
+ .detailsDiv div input {
+    height: 40px;
+    width: 89%;
+    border: none;
+    font-size: 20px;
+    background-color: inherit;
+ }
+
+ .detailsDiv div input:focus {
+    outline: none;
+   
+ }
+
+ .buttonWrapper {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-end;
+    align-items: center;
+ }
+
+ .buttonWrapper button {
+    background-color: rgb(11,129,90);
+    color: white;
+    font-size: 20px;
+    border-radius: 10px;
+    width: 150px;
+    height: 50px;
+    border: none;
+    margin: 10px 0;
+ }
+
+ @media (max-width: 600px) {
+    .wrapper {
+        height: 100vh;
+        top: 50px;
+        justify-content: center;
+    }
+    .frame1 {
+        width: 90%;
+        height: 68%;
+        padding: 10px;
+    }
+
+    .inputDiv img {
+        width: 20px;
+        height: 20px;
+        margin: 5px;
+    }
+
+    .inputDiv input {
+        height: 25px;
+        width: 80%;
+        font-size: 16px;
+    }
+
+    .dropdown {
+        height: 30px;
+        font-size: 15px;
+        padding: 5px 10px;
+        margin: 5px 0;
+        border-radius: 5px;
+     }
+
+     .uploadDiv {
+        height: 200px;
+        border-radius: 5px;
+     }
+
+     .uploadDiv img {
+        width: 40px;
+        height: 30px;
+     }
+
+     .uploadDiv h3 {
+        font-size: 14px;
+        margin: -5px;
+     }
+
+     .detailsDiv {
+        height: 30px;
+     }
+
+     .detailsDiv div img {
+        width: 12px;
+        height: 12px;
+        margin: 1px 5px;
+     }
+
+     .detailsDiv div input {
+        height: 28px;
+        width: 80%;
+        border: none;
+        font-size: 15px;
+        background-color: inherit;
+     }
+
+    .buttonWrapper {
+        height: 30px;
+        justify-content: center;
+    }
+
+    .buttonWrapper button {
+        font-size: 15px;
+        border-radius: 10px;
+        width: 150px;
+        height: 30px;
+     }
+ }

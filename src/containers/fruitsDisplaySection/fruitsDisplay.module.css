@@ -1,0 +1,23 @@
+.container {
+    width: 95%;
+    height: 220px;
+    overflow: auto;
+    white-space: nowrap;
+    /* background-color: aquamarine; */
+    margin:auto;
+    border-radius: 20px;
+    padding-top: 20px;
+}
+
+.container::-webkit-scrollbar {
+    display: none;
+  }
+
+@media (max-width: 700px) {
+    .container {
+        width: 95%;
+        height: 120px;
+        /* border: 1px solid rgb(103, 98, 98); */
+        padding-top: 10px;
+    }
+}

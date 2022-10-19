@@ -1,0 +1,52 @@
+.wrapper {
+    background-image: url('./image/heroBg.png');
+    flex-basis: 45%;
+    height: 650px;
+    width: 100%;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    background-position: right;
+    background-repeat: no-repeat;
+    background-size: 25vw 100%;
+}
+
+.container {
+    flex-basis: 60%;
+    height: 100%;
+    width: 60%;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    /* background-color: #ccc; */
+    margin-left: 20px;
+
+}
+
+@media (max-width: 700px) {
+    .wrapper {
+        flex-basis: 100%;
+        height: 370px;
+        width: 100%;
+        display: flex;
+        flex-flow: row wrap;
+        background-size: 70vw 100%;
+        flex-basis: 50%;
+        justify-content: flex-start;
+    }
+
+
+    .container {
+        flex-basis: 100%;
+        height: 100%;
+        width: 100%;
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-around;
+        /* background-color: #ccc; */
+        margin-left: 0px;
+    
+    }
+}

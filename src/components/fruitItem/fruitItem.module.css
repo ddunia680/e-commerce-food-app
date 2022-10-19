@@ -1,0 +1,141 @@
+.mainContainer {
+    display: inline-block;
+    width: fit-content;
+    /* background-color: aqua; */
+}
+
+.wrapper {
+    width: 320px;
+    height: 200px;
+    display: flex;
+    flex-flow: row wrap;
+    /* border: 1px solid rgb(106, 103, 103); */
+    backdrop-filter: blur(100px);
+    background-color: rgba(165, 165, 165, 0.1);
+    padding-right: 20px;
+    border-radius: 20px;
+    /* box-shadow: 0px 0px 2px rgb(96, 94, 94); */
+    margin: 0 10px;
+}
+
+.wrapper .fruitDiv {
+    flex-basis: 60%;
+    width: 60%;
+    box-sizing: border-box;
+}
+
+
+.fruitDiv img {
+    height: 75%;
+    width: 100%;
+    margin-top: -10px;
+    transition: all 100ms ease-in;
+}
+
+.fruitDiv img:hover {
+    height: 80%;
+    width: 110%;
+    margin-top: -20px;
+    margin-bottom: -0px;
+}
+
+.wrapper .info {
+    flex-basis: 40%;
+    width: 40%;
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: space-evenly;
+    /* background-color: blueviolet; */
+    box-sizing: border-box;
+}
+
+
+.info div {
+    /* background-color: brown; */
+    width: 100%;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-end;
+    margin-top: 1px;
+}
+.info img {
+    width: 40px;
+    height:40px;
+    border-radius: 50%;
+}
+.info .name {
+ margin: 0;
+ width: 100%;
+ text-align: right;
+ font-size: 20px;
+ color: rgb(47, 46, 46);
+ margin-top: 50px;
+}
+
+.info .calories {
+    margin: 0;
+    width: 100%;
+    text-align: right;
+    font-size: 16px;
+    font-weight: normal;
+    color: rgb(80, 78, 78);
+   }
+
+   .info .price {
+    margin: 0;
+    width: 100%;
+    text-align: right;
+    font-size: 20px;
+    color: rgb(47, 46, 46);
+   }
+
+   .price span {
+    color: rgb(253, 113, 5);
+   }
+
+   @media (max-width: 700px) {
+    .wrapper {
+        width: 200px;
+        height: 100px;
+        padding-right: 10px;
+        border-radius: 15px;
+        /* border: 1px solid rgb(100, 96, 96); */
+    }
+
+    .fruitDiv img {
+        height: 70%;
+        width: 100%;
+        margin-top: -10px;
+        transition: all 100ms ease-in;
+    }
+
+    .wrapper .info {
+        flex-basis: 40%;
+        width: 40%;
+        justify-content: flex-start;
+    }
+
+    .info img {
+        width: 20px;
+        height:20px;
+        margin-top: 0;
+        cursor: pointer;
+    }
+
+    .info .name {
+        font-size: 14px;
+        margin-top: 20px;
+       }
+
+    .info .calories {
+        font-size: 10px;
+        font-weight: normal;
+        text-align: right;
+       }
+    
+    .info .price {
+        text-align: right;
+        font-size: 14px;
+        color: rgb(47, 46, 46);
+       }
+   }

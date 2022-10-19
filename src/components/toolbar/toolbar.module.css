@@ -1,0 +1,56 @@
+.toolbar {
+    display: block;
+    flex-flow: row;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 80px;
+    background-color: rgb(240,240,240);
+    z-index: 100;
+    /* padding-right: 50px; */
+}
+
+.fullScreen {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    /* margin: 0 50px; */
+}
+
+.logoBox {
+    flex-basis: 40%;
+}
+
+.navBox {
+    flex-basis: 45%;
+    justify-content: flex-end;
+}
+
+.lastPart {
+    flex-basis: 15%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.smallScreen {
+    display: none;
+}
+
+@media (max-width: 1000px) {
+    .fullScreen {
+        display: none;
+    }
+    .smallScreen {
+        display: flex;
+        width: 100%;
+        height: 100%;
+        justify-content: space-between; 
+        align-items: center;
+    }
+    .toolbar {
+        height: 50px;
+    }
+}
