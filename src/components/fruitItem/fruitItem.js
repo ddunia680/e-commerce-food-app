@@ -1,9 +1,21 @@
 import React from 'react';
+import { useDispatch} from 'react-redux';
+import { ADDTOCART } from '../../store/cartElements';
 
 import classes from './fruitItem.module.css';
 import backet from './images/backet.jpg';
 
-function fruitItem(props) {
+function FruitItem(props) {
+    const dispatch = useDispatch();
+    // const cartItems = useSelector(state => state.cartElements.cartElements);
+    // console.log(cartItems);
+    const data = {
+        image: props.image,
+        name: props.name,
+        calories: props.calories,
+        price: props.price,
+        id: Math.random()
+    }
     return (
         <div className={classes.mainContainer}>
         <div className={classes.wrapper}>
@@ -12,7 +24,10 @@ function fruitItem(props) {
             </div>
             <div className={classes.info}>
                 <div>
-                    <img src={backet} alt=''/>
+                    <img 
+                        src={backet} alt='' 
+                        onClick={() => dispatch(ADDTOCART(data))}
+                    />
                 </div>
                 <h3 className={classes.name}>{props.name}</h3>
                 <h3 className={classes.calories}>{props.calories} Calories</h3>
@@ -23,4 +38,4 @@ function fruitItem(props) {
     );
 }
 
-export default fruitItem;
+export default FruitItem;

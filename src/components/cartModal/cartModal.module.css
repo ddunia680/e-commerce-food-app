@@ -8,6 +8,19 @@
     background-color: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(100px);
     box-shadow: 0 0 5px 1px #ccc;
+    /* display: none; */
+}
+
+.initialView {
+    display: none;
+}
+
+.visible {
+    animation: showModal 0.3s ease-in-out forwards;
+}
+
+.invisible {
+    animation: removeModal 0.3s ease-in-out forwards;
 }
 
 .header {
@@ -236,5 +249,36 @@
 
     .addedItems {
         height: 280px;
+    }
+}
+
+@keyframes showModal {
+    0% {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+    50% {
+        opacity: 0.5;
+        transform: translateX(50%);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(-0%);
+    }
+}
+
+@keyframes removeModal {
+    0% {
+        opacity: 1;
+        transform: translateX(-0%);
+    }
+    50% {
+        opacity: 0.5;
+        transform: translateX(50%);
+    }
+    100% {
+        opacity: 0;
+        transform: translateX(100%);
+        display: none;
     }
 }

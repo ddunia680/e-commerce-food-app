@@ -10,7 +10,7 @@ function dishItem(props) {
             <div>
                 <img src={dishImage} alt=''/>
             </div>
-            <span>Chicken</span>
+            <span>{props.name}</span>
         </div>
         </div>
         

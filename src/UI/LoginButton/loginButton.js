@@ -6,7 +6,7 @@ import classes from './loginButton.module.css';
 function loginButton(props) {
     return (
         <button className={classes.avatar}>
-            <img src={avatar} alt=''/>
+            <img src={avatar} alt='' onClick={props.clicked}/>
         </button>
     );
 }

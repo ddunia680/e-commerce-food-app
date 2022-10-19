@@ -19,24 +19,22 @@ function toolbar(props) {
                         <NavItems/>
                     </div>
                     <div className={classes.lastPart}>
-                        <CartButton/>
-                        <LoginButton/>
+                        <CartButton clicked={props.showCartH}/>
+                        <LoginButton clicked={props.clicked}/>
                     </div>
                 </div>
                 
                 <div className={classes.smallScreen}>
                     <div className={classes.left}>
-                        <CartButton/>
+                        <CartButton clicked={props.showCartH}/>
                     </div>
                     <div className={classes.middle}>
                         <Logo/>
                     </div>
                     <div className={classes.right}>
-                        <LoginButton/>
+                        <LoginButton clicked={props.clicked}/>
                     </div>
                 </div>
-                
-                
             </header>
             
         </div>
