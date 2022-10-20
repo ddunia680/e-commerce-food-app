@@ -1,81 +1,125 @@
-import React from 'react';
+import React, { useState } from 'react';
 import SectionHeader from '../../components/sectionHeader/sectionHeader';
 import DishItem from '../../components/dishItem/dishItem';
 import FruitItem from '../../components/fruitItem/fruitItem';
 
 import classes from './dishesDisplay.module.css';
-// import {f1, f2, f3 } from './images/fruits';
-// import { c1, c2, c3, c4 } from './images/chickens';
-// import { cu1, cu2, cu3, cu4, cu5 } from './images/Curry';
-// import { r1, r2, r3 } from './images/Rice';
-// import { fi1, fi2, fi3, fi4 } from './images/Fish';
-// import { i1, i2, i3, i4, i5 } from './images/Icecreams';
+import { oneChick, twoChick, threeChick, fourChick } from './images/chickens/chickens';
+import { oneCur, twoCur, threeCur, fourCur, fiveCur } from './images/Curry/curry';
+import { oneFi, twoFi, threeFi, fourFi } from './images/Fish/fishes';
+import { oneFr, twoFr, threeFr } from './images/fruits/fruits';
+import { oneIc, twoIc, threeIc, fourIc, fiveIc } from './images/Icecreams/icecreams';
+import { oneRi, twoRi, threeRi } from './images/Rice/rices';
+import { oneSo, twoSo, threeSo, fourSo, fiveSo } from './images/soft_drinks/soft_drinks';
 
 
+function DishesDisplay(props) {
+    let [dishesArray, setDishesArray] = useState([]);
+    // console.log(dishesArray);
 
-function dishesDisplay(props) {
+    const dishes = ['Chicken', 'Curry', 'Rice', 'Fish', 'Fruits', 'Icecreams', 'Soft Drinks'];
+    
 
-    const dishes = ['Chicken', 'Curry', 'Rice', 'Fish', 'Fruits', 'Icecreams', 'Soft Drinks']
+    const chickens = [
+        {image: oneChick, name: 'Broasted Chicken', calories: 80, price: 12.5}, 
+        {image: twoChick, name: 'Chicken Kebab Plate', calories: 65, price: 10}, 
+        {image: threeChick, name: 'Chicken Kebab', calories: 85, price: 12}, 
+        {image: fourChick, name: 'Chicken 65', calories: 80, price: 12.5}
+    ];
+    const curry = [
+        {image: oneCur, name: 'Panner Masala', calories: 100, price: 22.5}, 
+        {image: twoCur, name: 'Kadai Chicken', calories: 65, price: 16.5},
+        {image: threeCur, name: 'Butter Chicken', calories: 65, price: 18}, 
+        {image: fourCur, name: 'Prawn Masala', calories: 65, price: 20}, 
+        {image: fiveCur, name: 'Chicken Sauce', calories: 65, price: 17}
+    ];
+    const fishes = [
+        {image: oneFi, name: 'Mer Fruits', calories: 80, price: 25}, 
+        {image: twoFi, name: 'Roasted Fish', calories: 85, price: 17.5}, 
+        {image: threeFi, name: 'Fish Salad', calories: 75, price: 18}, 
+        {image: fourFi, name: 'Sea Fish', calories: 85, price: 18}
+    ];
+    const fruits = [
+        {image: oneFr, name: 'StrawBerries', calories: 85, price: 12}, 
+        {image: twoFr, name: 'Pinneapple', calories: 65, price: 12.5}, 
+        {image: threeFr, name: 'Blue Berries', calories: 85, price: 12.5}
+    ];
+    const icecreams = [
+        {image: oneIc, name: 'Violet Cream', calories: 85, price: 15}, 
+        {image: twoIc, name: 'White Cerise Cream', calories: 85, price: 13.5}, 
+        {image: threeIc, name: 'Biscruit Cream', calories: 80, price: 12.5}, 
+        {image: fourIc, name: 'Boll Creams', calories: 85, price: 12.5}, 
+        {image: fiveIc, name: 'Biscuit Plate Creams', calories: 77, price: 10.5}
+    ];
+    const rices = [
+        {image: oneRi, name: 'Rice Cheese', calories: 55, price: 7.5}, 
+        {image: twoRi, name: 'Rice Chicken', calories: 95, price: 20.5}, 
+        {image: threeRi, name: 'Pillao Chicken', calories: 95, price: 22.5}
+    ];
+    const softDrinks = [
+        {image: oneSo, name: 'Red Bull', calories: 65, price: 2.5}, 
+        {image: twoSo, name: 'Pepsi Canned', calories: 55, price: 2.5}, 
+        {image: threeSo, name: 'Monster Energy', calories: 65, price: 2.5}, 
+        {image: fourSo, name: 'Juice Cocktail', calories: 85, price: 5.5}, 
+        {image: fiveSo, name: 'Sprite Canned', calories: 85, price: 5.5}
+    ];
 
-    // const fruits = [
-    //     {image: f1, name: 'Blue Berries', calories: 80, price: 12},
-    //     {image: f2, name: 'Pine Apple', calories: 100, price: 16},
-    //     {image: f3, name: 'Strawberries', calories: 100, price: 22}
-    // ]
+    const displayDishesHandler = (dish) => {
+        switch(dish) {
+            case 'Chicken' :
+                setDishesArray(chickens)
+                break;
+            case 'Curry' :
+                setDishesArray(curry)
+                break;
+            case 'Rice' :
+                setDishesArray(rices)
+                break;
+            case 'Fish' :
+                setDishesArray(fishes)
+                break;
+            case 'Fruits' :
+                setDishesArray(fruits)
+                break;
+            case 'Icecreams' :
+                setDishesArray(icecreams)
+                break;
+            case 'Soft Drinks' : 
+                setDishesArray(softDrinks)
+                break;
+            default:
+                setDishesArray([]);
+        }
+    }
 
-    // const curry = [
-    //     {image: cu1, name: 'Blue Berries', calories: 80, price: 12},
-    //     {image: cu2, name: 'Pomegranate', calories: 120, price: 15},
-    //     {image: cu3, name: 'Rasperry', calories: 65, price: 20},
-    //     {image: cu4, name: 'Pine Apple', calories: 100, price: 16},
-    //     {image: cu5, name: 'Strawberries', calories: 100, price: 22}
-    // ]
-
-    // const chicken = [
-    //     {image: c1, name: 'Broasted Chicken', calories: 80, price: 12.5},
-    //     {image: c2, name: 'Chicken Kebab Plate', calories: 65, price: 10},
-    //     {image: c3, name: 'Chicken Kebab', calories: 85, price: 12},
-    //     {image: c4, name: 'Chicken 65', calories: 80, price: 12.5}
-    // ]
-
-    // const Rice = [
-    //     {image: r1, name: 'Blue Berries', calories: 80, price: 12},
-    //     {image: r2, name: 'Pomegranate', calories: 120, price: 15},
-    //     {image: r3, name: 'Rasperry', calories: 65, price: 20},
-    // ]
-
-    // const Fish = [
-    //     {image: fi1, name: 'Blue Berries', calories: 80, price: 12},
-    //     {image: fi2, name: 'Pomegranate', calories: 120, price: 15},
-    //     {image: fi3, name: 'Rasperry', calories: 65, price: 20},
-    //     {image: fi4, name: 'Rasperry', calories: 65, price: 20}
-    // ]
-
-    // const Icecreams = [
-    //     {image: i1, name: 'Blue Berries', calories: 80, price: 12},
-    //     {image: i2, name: 'Pomegranate', calories: 120, price: 15},
-    //     {image: i3, name: 'Rasperry', calories: 65, price: 20},
-    //     {image: i4, name: 'Rasperry', calories: 65, price: 20},
-    //     {image: i5, name: 'Rasperry', calories: 65, price: 20}
-    // ]
+    // console.log(dishesArray);
 
     return (
         <div>
             <SectionHeader title='Our Hot Dishes' scrollable={false}/>
             <div className={classes.wrapper}>
                 <div className={classes.menuPart}>
-                    {dishes.map(dish => <DishItem name={dish}/>)}
+                    {dishes.map(dish => 
+                                    <DishItem 
+                                        name={dish}
+                                        key={Math.random()*100} 
+                                        clicked={() => 
+                                            displayDishesHandler(dish)
+                                            }
+                                    />
+                                )
+                    }
                 </div>
             </div>
-            {/* <div className={classes.itemsWrapper}>
-                {fruits.map(el => {
+            <div className={classes.itemsWrapper}>
+                {dishesArray.map(el => {
                     return <FruitItem image={el.image} name={el.name} calories={el.calories} price={el.price} key={el.name}/>
                 })}
-            </div> */}
+            </div>
             
             
         </div>
     );
 }
 
-export default dishesDisplay;
+export default DishesDisplay;

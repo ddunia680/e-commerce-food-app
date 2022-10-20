@@ -13,7 +13,21 @@ function CartModal(props) {
     const cartElements = useSelector(state => state.cartElements.cartElements);
     const totalPrice = useSelector(state => state.cartElements.totalPrice);
     const dispatch = useDispatch();
-    // console.log(totalPrice);
+
+    const filteredCart = [];
+    const count= [];
+
+    for(let el of cartElements) {
+        if (!filteredCart.find(newEl => newEl.name === el.name)) {
+            filteredCart.push(el);
+            count.push(el.name);
+        } else {
+            count.push(el.name);
+        }
+    }
+
+    console.log(count);
+    console.log(filteredCart);
 
     useEffect(() => {
         if(props.touched) {
@@ -24,6 +38,16 @@ function CartModal(props) {
     const clearModal = () => {
         dispatch(CLEARCART());
         props.removeCart();
+    }
+
+    const countHanlder = (itemName) => {
+        let number;
+        count.forEach(el => {
+            if(el === itemName) {
+                number = number + 1;
+            }
+            return number
+        })
     }
 
     return (
@@ -38,11 +62,12 @@ function CartModal(props) {
             </header>
             <div className={classes.detailsWrapper}>
                 <div className={classes.addedItems}>
-                    {cartElements.map(cartEl => {
+                    {filteredCart.map(cartEl => {
                         return <Control 
                                     image={cartEl.image} 
                                     name={cartEl.name}
                                     price={cartEl.price}
+                                    count={() => countHanlder(cartEl.name)}
                                     key={cartEl.id}
                                 />
                     })}

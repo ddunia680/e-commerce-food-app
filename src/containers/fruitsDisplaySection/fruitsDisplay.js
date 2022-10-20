@@ -16,11 +16,11 @@ function FruitDisplay(props) {
     let scrl = useRef();
 
     const fruits = [
-        {image: blueberry, name: 'Blue Berries', calories: 80, price: 12},
-        {image: pomegranate, name: 'Pomegranate', calories: 120, price: 15},
-        {image: rasberry, name: 'Rasperry', calories: 65, price: 20},
-        {image: pinnneapple, name: 'Pine Apple', calories: 100, price: 16},
-        {image: strawberry, name: 'Strawberries', calories: 100, price: 22}
+        {image: blueberry, name: 'Blue Berries', calories: 80, price: 12, id: 100},
+        {image: pomegranate, name: 'Pomegranate', calories: 120, price: 15, id: 101},
+        {image: rasberry, name: 'Rasperry', calories: 65, price: 20, id: 102},
+        {image: pinnneapple, name: 'Pine Apple', calories: 100, price: 16, id: 103},
+        {image: strawberry, name: 'Strawberries', calories: 100, price: 22, id: 104}
     ]
 
     const slide = (shift) => {
@@ -50,7 +50,7 @@ function FruitDisplay(props) {
 
             <div className={classes.container} ref={scrl}>
                 {fruits.map(el => {
-                    return <FruitItem image={el.image} name={el.name} calories={el.calories} price={el.price} key={el.name}/>
+                    return <FruitItem image={el.image} name={el.name} calories={el.calories} price={el.price} key={el.id} id={el.id}/>
                 })} 
             </div>
         </div>

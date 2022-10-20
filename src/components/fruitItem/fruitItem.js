@@ -7,14 +7,13 @@ import backet from './images/backet.jpg';
 
 function FruitItem(props) {
     const dispatch = useDispatch();
-    // const cartItems = useSelector(state => state.cartElements.cartElements);
-    // console.log(cartItems);
+
     const data = {
         image: props.image,
         name: props.name,
         calories: props.calories,
         price: props.price,
-        id: Math.random()
+        id: props.id
     }
     return (
         <div className={classes.mainContainer}>

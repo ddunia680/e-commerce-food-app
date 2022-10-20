@@ -4,6 +4,7 @@ import classes from './control.module.css';
 // import straw from './images/f3.png';
 
 function control(props) {
+    console.log(props.count);
     return (
         <div className={classes.wrapper}>
             <img src={props.image} alt='' />
@@ -13,7 +14,7 @@ function control(props) {
             </div>
             <div className={classes.control}>
                 <button>+</button>
-                <div>1</div>
+                <div>{props.count}</div>
                 <button>-</button>
             </div>
         </div>
