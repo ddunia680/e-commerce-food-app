@@ -45,7 +45,7 @@ p {
     font-family: 'Arial', sans-serif;
     color: rgb(94, 92, 92);
     font-size: large;
-    padding-right: 200px;
+    /* padding-right: 200px; */
     font-weight: 300;
     text-shadow: 0.5px 1px 1px rgb(94, 92, 92);
 }

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Control from '../Control/control';
-import { CLEARCART } from '../../store/cartElements';
+import { ADDTOCART, CLEARCART, DELETETOCART } from '../../store/cartElements';
 
 import classes from './cartModal.module.css';
 import arrow from './images/arrow.png';
@@ -17,6 +17,10 @@ function CartModal(props) {
     const filteredCart = [];
     const count= [];
 
+    // // console.log(cartElements);
+    // console.log(filteredCart);
+    // console.log(count);
+
     for(let el of cartElements) {
         if (!filteredCart.find(newEl => newEl.name === el.name)) {
             filteredCart.push(el);
@@ -25,9 +29,6 @@ function CartModal(props) {
             count.push(el.name);
         }
     }
-
-    console.log(count);
-    console.log(filteredCart);
 
     useEffect(() => {
         if(props.touched) {
@@ -40,15 +41,21 @@ function CartModal(props) {
         props.removeCart();
     }
 
-    const countHanlder = (itemName) => {
-        let number;
-        count.forEach(el => {
-            if(el === itemName) {
-                number = number + 1;
-            }
-            return number
-        })
+    const deleteItemHandler = (name, price) => {
+        dispatch(DELETETOCART({name: name, price: price}));
     }
+
+    const addItemToCart = (array) => {
+        const data = {
+            image: array[0],
+            name: array[1],
+            calories: array[2],
+            price: array[3],
+            id: array[4]
+        }
+        dispatch(ADDTOCART(data));
+    }
+    
 
     return (
         <div className={decider.join(' ')}>
@@ -67,7 +74,16 @@ function CartModal(props) {
                                     image={cartEl.image} 
                                     name={cartEl.name}
                                     price={cartEl.price}
-                                    count={() => countHanlder(cartEl.name)}
+                                    count={count.filter(el => el === cartEl.name).length}
+                                    deleteEl={() => deleteItemHandler(cartEl.name, cartEl.price)}
+                                    addNewEl={() => 
+                                        addItemToCart([
+                                            cartEl.image, 
+                                            cartEl.name, 
+                                            cartEl.calories, 
+                                            cartEl.price, 
+                                            cartEl.id]
+                                        )}
                                     key={cartEl.id}
                                 />
                     })}

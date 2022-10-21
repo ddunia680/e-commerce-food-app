@@ -29,6 +29,17 @@
     font-size: 17px;
 }
 
+.add:hover {
+    font-weight: bolder;
+    cursor: pointer;
+}
+
+.logout:hover {
+    font-weight: bolder;
+    cursor: pointer;
+    color: rgb(238, 106, 106);
+}
+
 .wrapper div span {
     margin-left: 10px;
     /* font-size: 22px; */

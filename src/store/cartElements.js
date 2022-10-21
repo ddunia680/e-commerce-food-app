@@ -15,6 +15,12 @@ const cartElementsSlice = createSlice({
             state.totalPrice = state.totalPrice + action.payload.price;
         },
 
+        DELETETOCART: (state, action) => {
+            state.cartElements.shift(el => el.name === action.payload.name);
+            state.totalPrice -= action.payload.price;
+            state.counter = state.counter - 1;
+        },
+
         CLEARCART: (state) => {
             state.cartElements = [];
             state.counter = 0;
@@ -23,6 +29,6 @@ const cartElementsSlice = createSlice({
     }
 });
 
-export const { ADDTOCART, CLEARCART } = cartElementsSlice.actions;
+export const { ADDTOCART, CLEARCART, DELETETOCART } = cartElementsSlice.actions;
 
 export default cartElementsSlice.reducer;

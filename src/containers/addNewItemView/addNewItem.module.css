@@ -11,6 +11,18 @@
     align-items: center;
 }
 
+.initial {
+   display: none;
+}
+
+.invisible {
+   animation: removeAddModal 0.5s ease-in-out forwards;
+}
+
+.visible {
+   animation: showAddModal 0.5s ease-in forwards;
+}
+
 .frame1 {
     border: 1px solid#ccc;
     width: 50%;
@@ -234,3 +246,35 @@
         height: 30px;
      }
  }
+
+ 
+@keyframes showAddModal {
+   0% {
+       opacity: 0;
+       transform: translateX(100%);
+   }
+   50% {
+       opacity: 1;
+       transform: translateX(50%);
+   }
+   100% {
+       opacity: 1;
+       transform: translateX(-0%);
+   }
+}
+
+@keyframes removeAddModal {
+   0% {
+       opacity: 1;
+       transform: translateX(-0%);
+   }
+   50% {
+       opacity: 1;
+       transform: translateX(50%);
+   }
+   100% {
+       opacity: 0;
+       transform: translateX(100%);
+       display: none;
+   }
+}
