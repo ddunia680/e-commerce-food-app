@@ -1,4 +1,5 @@
 import React, { useRef, useState } from 'react';
+// import { useSelector } from 'react-redux';
 import SectionHeader from '../../components/sectionHeader/sectionHeader';
 import FruitItem from '../../components/fruitItem/fruitItem';
 
@@ -10,9 +11,9 @@ import pinnneapple from './images/f2.png';
 import strawberry from './images/f1.png';
 
 function FruitDisplay(props) {
-
     const [scrollX, setScrollX] = useState(0);
     const [scrollEnd, setScrollEnd] = useState(false);
+    // let fruits = useSelector(state => state.articles.articles.fruits);
     let scrl = useRef();
 
     const fruits = [

@@ -5,26 +5,27 @@ import cup from './icons/cup.png';
 import cloud from './icons/cloud.png';
 import residence from './icons/residence.png';
 import dollar from './icons/dollar.png';
-import { Transition } from 'react-transition-group';
+import { useDispatch } from 'react-redux';
+import { ADDNEWARTICLE } from '../../store/articles';
 
 function AddNewItem(props) {
     const title = useRef();
     let [titleValid, setTiltleValid] = useState(false);
-    // let [selectIsValid, setSelectValidity] = useState(false);
-    // let [uploadIsValid, setUploadValidy] = useState(false);
     let [caloriesValid, setCaloriesValidity] = useState(false);
     let [priceIsValid, setPriceValidity] = useState(false);
     let [formValid, setformValidity] = useState(false);
     let [touched, setTouched] = useState({title: false, calories: false, price: false});
 
-    let [formValues, setFormValues] = useState({title: '', category: '', calories: '', price: ''});
+    let [formValues, setFormValues] = useState({title: '', category: 'chickens', calories: '', price: ''});
     let [uploadedImage, setUploadedImage] = useState(); 
     let [updateMclasses, setMclasses] = useState(false);
     let [addedModalClasses, setAddedModalClasses] = useState([]);
+    let [modalDisplayMessage, setModalMessage] = useState('');
     let uplaodInput = useRef();
-    const transitionDuration = 300;
+    let dispatch = useDispatch();
 
-    const dishes = ['Chicken', 'Curry', 'Rice', 'Fish', 'Fruits', 'Icecreams', 'Soft Drinks'];
+    console.log(formValues);
+    const dishes = ['Chickens', 'Curries', 'Rices', 'Fishes', 'Fruits', 'Icecreams', 'Soft Drinks'];
 
     const wrapperClasses = [classes.wrapper, !props.touched ? classes.initial : props.show ? classes.visible : classes.invisible];
 
@@ -75,12 +76,13 @@ function AddNewItem(props) {
         setformValidity(titleValid && caloriesValid && uploadedImage && priceIsValid);
     }, [titleValid, caloriesValid, priceIsValid, uploadedImage])
     
-    console.log(formValid);
+    // console.log(formValid);
 
     const storeUploadedFile = (event) => {
         if(event.target.files && event.target.files[0]) {
             setUploadedImage(URL.createObjectURL(event.target.files[0]));
             setMclasses(true);
+            setModalMessage('File Added');
         }
     }
     useEffect(() => {
@@ -100,16 +102,33 @@ function AddNewItem(props) {
     }, [uploadedImage]);
 
 
-    const submitData = (event) => {
-        
+    const submitData = () => {
+        const dataToSend = {
+            type: formValues.category.toLowerCase(),
+            data: {
+                image: uploadedImage,
+                name: formValues.title,
+                calories: formValues.calories,
+                price: +formValues.price,
+                id: Math.random * 100
+            }
+        }
+        console.log(dataToSend);
+        dispatch(ADDNEWARTICLE(dataToSend));
+        setModalMessage('Article Added!');
+        setAddedModalClasses([classes.addedConfirm, classes.Addedvisible]);
+        setTimeout(() => {
+            setAddedModalClasses([classes.addedConfirm, classes.Addedinvisible]);
+            setTimeout(() => {
+                props.remove();
+            }, 500);
+            
+        }, 2000);
     }
     return (
         <div className={wrapperClasses.join(' ')}>
             <div className={classes.frame1}>
-                {/* <Transition in={updateMclasses} timeout={300}>
-                    {state => <p>{state}</p>} */}
-                    <p className={addedModalClasses.join(' ')}>File Added</p>
-                {/* </Transition> */}
+                    <p className={addedModalClasses.join(' ')}>{modalDisplayMessage}</p>
                 
                 <div 
                     className={`${classes.inputDiv} ${touched.title ? !titleValid ? classes.invalid: null : null}`}
@@ -129,7 +148,14 @@ function AddNewItem(props) {
                         value={formValues.title}
                     />
                 </div>
-                <select className={classes.dropdown}>
+                <select 
+                    className={classes.dropdown} 
+                    onChange={event => {
+                        let updatedForm = {...formValues}
+                        updatedForm.category = event.target.value;
+                        setFormValues(updatedForm);
+                    }}
+                >
                     {dishes.map(el => <option key={el} value={el}>{el}</option>)}
                 </select>
                 <input 

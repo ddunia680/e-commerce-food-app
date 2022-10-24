@@ -38,6 +38,10 @@ function Builder(props) {
         setAddModalTouched(true);
     }
 
+    const hideModalHandler = () => {
+        setshowAddModal(false);
+    }
+
     return (
         <div className={classes.wrapper}>
             <Toolbar clicked={showToolbarDrop} showCartH={showCartHandler}/>
@@ -50,7 +54,7 @@ function Builder(props) {
                                 addClicked = {showAddModalHandler}
                             />: null
             }
-            <AddNewItem show={showAddModal} touched={addModalTouched}/>
+            <AddNewItem show={showAddModal} remove={hideModalHandler} touched={addModalTouched}/>
 
         </div>
     );
