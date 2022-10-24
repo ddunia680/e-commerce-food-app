@@ -5,7 +5,7 @@ import cup from './icons/cup.png';
 import cloud from './icons/cloud.png';
 import residence from './icons/residence.png';
 import dollar from './icons/dollar.png';
-import d8 from './icons/d8.png';
+import { Transition } from 'react-transition-group';
 
 function AddNewItem(props) {
     const title = useRef();
@@ -18,13 +18,18 @@ function AddNewItem(props) {
     let [touched, setTouched] = useState({title: false, calories: false, price: false});
 
     let [formValues, setFormValues] = useState({title: '', category: '', calories: '', price: ''});
-    let [uploadedImage, setUploadedImage] = useState(null); 
+    let [uploadedImage, setUploadedImage] = useState(); 
+    let [updateMclasses, setMclasses] = useState(false);
+    let [addedModalClasses, setAddedModalClasses] = useState([]);
     let uplaodInput = useRef();
+    const transitionDuration = 300;
 
     const dishes = ['Chicken', 'Curry', 'Rice', 'Fish', 'Fruits', 'Icecreams', 'Soft Drinks'];
 
     const wrapperClasses = [classes.wrapper, !props.touched ? classes.initial : props.show ? classes.visible : classes.invisible];
 
+
+    // console.log(uploadedImage);
     const validityCheck = (type, event) => {
         if(type === 'title') {
             if(event.target.value !== '') {
@@ -67,20 +72,48 @@ function AddNewItem(props) {
     }
 
     useEffect(() => {
-        setformValidity(titleValid && caloriesValid && priceIsValid);
-    }, [titleValid, caloriesValid, priceIsValid])
+        setformValidity(titleValid && caloriesValid && uploadedImage && priceIsValid);
+    }, [titleValid, caloriesValid, priceIsValid, uploadedImage])
     
-    // console.log(formValid);
+    console.log(formValid);
 
     const storeUploadedFile = (event) => {
-        setUploadedImage(event.target.files[0]);
-        console.log(event.target.files[0]);
+        if(event.target.files && event.target.files[0]) {
+            setUploadedImage(URL.createObjectURL(event.target.files[0]));
+            setMclasses(true);
+        }
     }
+    useEffect(() => {
+        setAddedModalClasses([classes.addedConfirm, !updateMclasses ? classes.initialState : !uploadedImage ? null : classes.Addedvisible]);
+    }, [uploadedImage]);
+    
 
+    useEffect(() => {
+        if(uploadedImage) {
+            setTimeout(() => {
+                setAddedModalClasses([classes.addedConfirm, classes.Addedinvisible]);
+                setTimeout(() => {
+                    setAddedModalClasses([classes.unMount]);
+                }, 300);
+            }, 3000);
+        }
+    }, [uploadedImage]);
+
+
+    const submitData = (event) => {
+        
+    }
     return (
         <div className={wrapperClasses.join(' ')}>
             <div className={classes.frame1}>
-                <div className={`${classes.inputDiv} ${touched.title ? !titleValid ? classes.invalid: null : null}`}>
+                {/* <Transition in={updateMclasses} timeout={300}>
+                    {state => <p>{state}</p>} */}
+                    <p className={addedModalClasses.join(' ')}>File Added</p>
+                {/* </Transition> */}
+                
+                <div 
+                    className={`${classes.inputDiv} ${touched.title ? !titleValid ? classes.invalid: null : null}`}
+                >
                     <img src={cup} alt=''/>
                     <input 
                         type='text' 
@@ -93,7 +126,8 @@ function AddNewItem(props) {
                             setFormValues(updatedForm);
                         }
                         } 
-                        value={formValues.title}/>
+                        value={formValues.title}
+                    />
                 </div>
                 <select className={classes.dropdown}>
                     {dishes.map(el => <option key={el} value={el}>{el}</option>)}
@@ -104,14 +138,16 @@ function AddNewItem(props) {
                     onChange={event => storeUploadedFile(event)}
                     style={{display: 'none'}}
                 />
-                <div className={classes.uploadDiv} onClick={() => uplaodInput.current.click()}>
+                { !uploadedImage ? <div className={classes.uploadDiv} onClick={() => uplaodInput.current.click()}>
                     <img src={cloud} alt=''/>
                     <h3>Click here to upload</h3>
-                    {/* <div className={classes.uploaded}>
-                        <img src={d8} alt=''/>
-                    </div> */}
+                </div> :
+                <div className={classes.uploadDiv}>
+                    <div className={classes.uploaded}>
+                        <img src={uploadedImage} alt=''/>
+                    </div>
+                </div> }
                     
-                </div>
                 <div className={classes.detailsDiv}>
                     <div className={`${classes.calories} ${touched.calories ? !caloriesValid ? classes.invalid : null: null}`}>
                         <img src={residence} alt=''/>
@@ -145,7 +181,11 @@ function AddNewItem(props) {
                     </div>
                 </div>
                 <div className={classes.buttonWrapper}>
-                    <button disabled={!formValid}>Save</button>
+                    <button 
+                        disabled={!formValid} 
+                        onClick={event => submitData(event)}>
+                            Save
+                    </button>
                 </div>
             </div>
         </div>

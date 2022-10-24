@@ -207,6 +207,36 @@
  .invalid {
    border-bottom: 1px solid rgb(218, 32, 32);
  }
+
+ .addedConfirm {
+   background-color: rgb(190, 60, 190);
+   color: white;
+   width: 50%;
+   height: 50px;
+   display: flex;
+   flex-flow: row wrap;
+   justify-content: center;
+   align-items: center;
+   margin: 0 auto;
+   border-radius: 10px;
+   box-shadow: 0 8px 30px rgb(110, 108, 108);
+ }
+
+ .initialState { 
+   display: none;
+ }
+
+ .Addedvisible {
+   animation: addedAppear 0.5s ease-in forwards;
+ }
+
+ .Addedinvisible {
+   animation: addedDisappear 0.5s ease-in forwards;
+ }
+ .unMount {
+   display: none;
+ }
+
  @media (max-width: 600px) {
     .wrapper {
         height: 100vh;
@@ -338,5 +368,35 @@
    }
    100% {
       transform: scale(1);
+   }
+}
+
+@keyframes addedAppear{
+   0% {
+      opacity: 0;
+      transform: scale(0);
+   }
+   50% {
+      opacity: 0.5;
+      transform: scale(0.5);
+   }
+   100% {
+      opacity: 1;
+      transform: scale(1);
+   }
+}
+
+@keyframes addedDisappear{
+   0% {
+      opacity: 1;
+      transform: scale(1);
+   }
+   50% {
+      opacity: 0.5;
+      transform: scale(0.5);
+   }
+   100% {
+      opacity: 0;
+      transform: scale(0);
    }
 }
