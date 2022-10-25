@@ -1,52 +1,53 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "../axios-orders";
 
-export const pullArticles = createAsyncThunk(
+export const pullRices = createAsyncThunk(
     'data/pulledArticles',
     () => {
-        return axios.get('/articles.json').then(res => {
+        return axios.get('/rices.json').then(res => {
             // console.log(res.data);
             return res.data;
         })
     }
 );
 
-const ArticlesSlice = createSlice({
-    name: 'articles',
+const ricesSlice = createSlice({
+    name: 'rices',
     initialState: {
-        articles : [],
+        rices : [],
         pullingStatus: '',
         error: ''
         
     },
 
     reducers: {
-        ADDNEWARTICLE: (state, action) => {
+        ADDNEWRICE: (state, action) => {
             let type = action.payload.type;
             let data = action.payload.data;
             state.articles[type].push(data);
         }
     }, extraReducers(builder) {
         builder
-        .addCase(pullArticles.pending, (state, action) => {
+        .addCase(pullRices.pending, (state, action) => {
             state.pullingStatus = 'loading';
         })
-        .addCase(pullArticles.fulfilled, (state, action) => {
+        .addCase(pullRices.fulfilled, (state, action) => {
             state.pullingStatus = 'succeeded';
-            let row = action.payload;
-            let fetchedArticles = [];
-            for (let key in row) {
-                fetchedArticles.push(row[key]);
-            };
-            state.articles = fetchedArticles;
+            let fetched = [];
+            for(let key in action.payload) {
+                action.payload[key].map(el => {
+                    return fetched.push(el);
+                })
+            }
+            state.rices = fetched;
         })
-        .addCase(pullArticles.rejected, (state, action) => {
+        .addCase(pullRices.rejected, (state, action) => {
             state.pullingStatus = 'failed';
             state.error = action.error.message
         })
     }
 })
 
-export const { ADDNEWARTICLE } = ArticlesSlice.actions;
+export const { ADDNEWRICE } = ricesSlice.actions;
 
-export default ArticlesSlice.reducer;
+export default ricesSlice.reducer;

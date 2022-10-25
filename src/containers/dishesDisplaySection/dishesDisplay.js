@@ -4,44 +4,61 @@ import DishItem from '../../components/dishItem/dishItem';
 import FruitItem from '../../components/fruitItem/fruitItem';
 
 import classes from './dishesDisplay.module.css';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { pullChickens } from '../../store/chickens';
+import { pullCurries } from '../../store/curries';
+import { pullRices } from '../../store/rices';
+import { pullFishes } from '../../store/fishes';
+import { pullIcecreams } from '../../store/icecreams';
+import { pullSoftDrinks } from '../../store/softDrinks';
 
 
-function DishesDisplay(props) {
+function DishesDisplay() {
     let [dishesArray, setDishesArray] = useState([]);
-    let articles = useSelector(state => state.articles.articles);
+    let dispatch = useDispatch();
+    let chickens = useSelector(state => state.chickens.chickens);
+    let curries = useSelector(state => state.curries.curries);
+    let fishes = useSelector(state => state.fishes.fishes);
+    let icecreams = useSelector(state => state.icecreams.icecreams);
+    let rices = useSelector(state => state.rices.rices);
+    let softDrinks = useSelector(state => state.softDrinks.softDrinks);
 
-    const dishes = ['Chicken', 'Curry', 'Rice', 'Fish', 'Fruits', 'Icecreams', 'Soft Drinks'];
+    const dishes = ['Chicken', 'Curry', 'Rice', 'Fish', 'Icecreams', 'Soft Drinks'];
+
+    console.log(dishesArray);
     
     const displayDishesHandler = (dish) => {
         switch(dish) {
             case 'Chicken' :
-                setDishesArray(articles.chickens)
+                setDishesArray(chickens);
+                dispatch(pullChickens());
                 break;
             case 'Curry' :
-                setDishesArray(articles.curries)
+                dispatch(pullCurries());
+                setDishesArray(curries);
                 break;
             case 'Rice' :
-                setDishesArray(articles.rices)
+                dispatch(pullRices());
+                setDishesArray(rices);
                 break;
             case 'Fish' :
-                setDishesArray(articles.fishes)
-                break;
-            case 'Fruits' :
-                setDishesArray(articles.fruits)
+                dispatch(pullFishes());
+                setDishesArray(fishes);
                 break;
             case 'Icecreams' :
-                setDishesArray(articles.icecreams)
+                dispatch(pullIcecreams());
+                setDishesArray(icecreams);
                 break;
-            case 'Soft Drinks' : 
-                setDishesArray(articles.softDrinks)
+            case 'Soft Drinks' :
+                dispatch(pullSoftDrinks());
+                setDishesArray(softDrinks);
                 break;
             default:
                 setDishesArray([]);
+                break;
         }
     }
-
-    // console.log(dishesArray);
 
     return (
         <div>
@@ -61,7 +78,7 @@ function DishesDisplay(props) {
                 </div>
             </div>
             <div className={classes.itemsWrapper}>
-                {dishesArray.map(el => {
+                {chickens.map(el => {
                     return <FruitItem image={el.image} name={el.name} calories={el.calories} price={el.price} key={el.id} id={el.id}/>
                 })}
             </div>

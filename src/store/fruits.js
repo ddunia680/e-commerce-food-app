@@ -1,52 +1,52 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "../axios-orders";
 
-export const pullArticles = createAsyncThunk(
-    'data/pulledArticles',
+export const pullFruits = createAsyncThunk(
+    'data/pulledFruits',
     () => {
-        return axios.get('/articles.json').then(res => {
+        return axios.get('/fruits.json').then(res => {
             // console.log(res.data);
             return res.data;
         })
     }
 );
 
-const ArticlesSlice = createSlice({
-    name: 'articles',
+const fruitsSlice = createSlice({
+    name: 'fruits',
     initialState: {
-        articles : [],
+        fruits : [],
         pullingStatus: '',
         error: ''
         
     },
 
     reducers: {
-        ADDNEWARTICLE: (state, action) => {
+        ADDNEWFRUIT: (state, action) => {
             let type = action.payload.type;
             let data = action.payload.data;
             state.articles[type].push(data);
         }
     }, extraReducers(builder) {
         builder
-        .addCase(pullArticles.pending, (state, action) => {
+        .addCase(pullFruits.pending, (state, action) => {
             state.pullingStatus = 'loading';
         })
-        .addCase(pullArticles.fulfilled, (state, action) => {
+        .addCase(pullFruits.fulfilled, (state, action) => {
             state.pullingStatus = 'succeeded';
-            let row = action.payload;
+            let raw = action.payload;
             let fetchedArticles = [];
-            for (let key in row) {
-                fetchedArticles.push(row[key]);
+            for (let key in raw) {
+                fetchedArticles.push(raw[key]);
             };
-            state.articles = fetchedArticles;
+            state.fruits = fetchedArticles[0];
         })
-        .addCase(pullArticles.rejected, (state, action) => {
+        .addCase(pullFruits.rejected, (state, action) => {
             state.pullingStatus = 'failed';
             state.error = action.error.message
         })
     }
 })
 
-export const { ADDNEWARTICLE } = ArticlesSlice.actions;
+export const { ADDNEWFRUIT } = fruitsSlice.actions;
 
-export default ArticlesSlice.reducer;
+export default fruitsSlice.reducer;

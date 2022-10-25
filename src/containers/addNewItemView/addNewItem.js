@@ -24,7 +24,7 @@ function AddNewItem(props) {
     let uplaodInput = useRef();
     let dispatch = useDispatch();
 
-    console.log(formValues);
+    // console.log(formValues);
     const dishes = ['Chickens', 'Curries', 'Rices', 'Fishes', 'Fruits', 'Icecreams', 'Soft Drinks'];
 
     const wrapperClasses = [classes.wrapper, !props.touched ? classes.initial : props.show ? classes.visible : classes.invisible];
@@ -121,10 +121,15 @@ function AddNewItem(props) {
             setAddedModalClasses([classes.addedConfirm, classes.Addedinvisible]);
             setTimeout(() => {
                 props.remove();
+                setAddedModalClasses([classes.addedConfirm, classes.initialState]);
+                setFormValues({title: '', category: 'chickens', calories: '', price: ''});
+                setUploadedImage(null);
+                setMclasses(false);
             }, 500);
             
         }, 2000);
     }
+    // console.log(addedModalClasses);
     return (
         <div className={wrapperClasses.join(' ')}>
             <div className={classes.frame1}>
