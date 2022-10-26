@@ -6,7 +6,15 @@ import cloud from './icons/cloud.png';
 import residence from './icons/residence.png';
 import dollar from './icons/dollar.png';
 import { useDispatch } from 'react-redux';
-// import { ADDNEWARTICLE } from '../../store/articles';
+
+
+import { pushToChickens } from '../../store/chickens';
+import { pushToCurries } from '../../store/curries';
+import { pushToFishes } from '../../store/fishes';
+import { pushToFruits } from '../../store/fruits';
+import { pushToIceCreams } from '../../store/icecreams';
+import { pushToRices } from '../../store/rices';
+import { pushToSoftDrinks } from '../../store/softDrinks';
 
 function AddNewItem(props) {
     const title = useRef();
@@ -16,8 +24,8 @@ function AddNewItem(props) {
     let [formValid, setformValidity] = useState(false);
     let [touched, setTouched] = useState({title: false, calories: false, price: false});
 
-    let [formValues, setFormValues] = useState({title: '', category: 'chickens', calories: '', price: ''});
-    let [uploadedImage, setUploadedImage] = useState(); 
+    let [formValues, setFormValues] = useState({title: '', category: 'Chickens', calories: '', price: ''});
+    let [uploadedImage, setUploadedImage] = useState(''); 
     let [updateMclasses, setMclasses] = useState(false);
     let [addedModalClasses, setAddedModalClasses] = useState([]);
     let [modalDisplayMessage, setModalMessage] = useState('');
@@ -101,19 +109,42 @@ function AddNewItem(props) {
         }
     }, [uploadedImage]);
 
-
+console.log(uploadedImage);
     const submitData = () => {
         const dataToSend = {
-            type: formValues.category.toLowerCase(),
-            data: {
                 image: uploadedImage,
                 name: formValues.title,
-                calories: formValues.calories,
+                calories: +formValues.calories,
                 price: +formValues.price,
                 id: Math.random * 100
-            }
         }
         console.log(dataToSend);
+        switch (formValues.category) {
+            case 'Chicken':
+                dispatch(pushToChickens(dataToSend));
+                break;
+            case 'Curries':
+                dispatch(pushToCurries(dataToSend));
+                break;
+            case 'Rices':
+                dispatch(pushToRices(dataToSend));
+                break;
+            case 'Fishes':
+                dispatch(pushToFishes(dataToSend));
+                break;
+            case 'Fruits':
+                dispatch(pushToFruits(dataToSend));
+                break;
+            case 'Icecreams':
+                dispatch(pushToIceCreams(dataToSend));
+                break;
+            case 'Soft Drinks':
+                dispatch(pushToSoftDrinks(dataToSend));
+                break;
+        
+            default:
+                break;
+        }
         // dispatch(ADDNEWARTICLE(dataToSend));
         setModalMessage('Article Added!');
         setAddedModalClasses([classes.addedConfirm, classes.Addedvisible]);

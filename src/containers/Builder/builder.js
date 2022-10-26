@@ -7,7 +7,6 @@ import CartModal from '../../components/cartModal/cartModal';
 import Dropdown from '../../components/headerDropdown/dropdown';
 import AddNewItem from '../addNewItemView/addNewItem';
 import Spinner from '../../UI/Spinner/spinner';
-// import { pullArticles } from '../../store/articles';
 
 
 import classes from './builder.module.css';
@@ -68,7 +67,7 @@ function Builder(props) {
                                     addClicked = {showAddModalHandler}
                                 />: null
                 }
-                {/* <AddNewItem show={showAddModal} remove={hideModalHandler} touched={addModalTouched}/> */}
+                <AddNewItem show={showAddModal} remove={hideModalHandler} touched={addModalTouched}/>
                 {/* <Provisuary/> */}
             </>
         )

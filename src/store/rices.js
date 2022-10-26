@@ -1,10 +1,21 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "../axios-orders";
 
+
+export const pushToRices = createAsyncThunk(
+    'data/pushToRices',
+    (data) => {
+        return axios.post('/ricesList.json', data).then(res => {
+            console.log(res.data);
+            return res.data;
+        })
+    }
+);
+
 export const pullRices = createAsyncThunk(
     'data/pulledArticles',
     () => {
-        return axios.get('/rices.json').then(res => {
+        return axios.get('/ricesList.json').then(res => {
             // console.log(res.data);
             return res.data;
         })
@@ -21,11 +32,6 @@ const ricesSlice = createSlice({
     },
 
     reducers: {
-        ADDNEWRICE: (state, action) => {
-            let type = action.payload.type;
-            let data = action.payload.data;
-            state.articles[type].push(data);
-        }
     }, extraReducers(builder) {
         builder
         .addCase(pullRices.pending, (state, action) => {
@@ -35,9 +41,7 @@ const ricesSlice = createSlice({
             state.pullingStatus = 'succeeded';
             let fetched = [];
             for(let key in action.payload) {
-                action.payload[key].map(el => {
-                    return fetched.push(el);
-                })
+                fetched.push(action.payload[key]);
             }
             state.rices = fetched;
         })

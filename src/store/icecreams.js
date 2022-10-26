@@ -1,10 +1,21 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "../axios-orders";
 
+
+export const pushToIceCreams = createAsyncThunk(
+    'data/pushToIcecreams',
+    (data) => {
+        return axios.post('/icecreamsList.json', data).then(res => {
+            console.log(res.data);
+            return res.data;
+        })
+    }
+);
+
 export const pullIcecreams = createAsyncThunk(
     'data/pulledArticles',
     () => {
-        return axios.get('/icecreams.json').then(res => {
+        return axios.get('/icecreamsList.json').then(res => {
             // console.log(res.data);
             return res.data;
         })
@@ -21,11 +32,7 @@ const icecreamsSlice = createSlice({
     },
 
     reducers: {
-        ADDNEWICECREAM: (state, action) => {
-            let type = action.payload.type;
-            let data = action.payload.data;
-            state.articles[type].push(data);
-        }
+
     }, extraReducers(builder) {
         builder
         .addCase(pullIcecreams.pending, (state, action) => {
@@ -35,9 +42,7 @@ const icecreamsSlice = createSlice({
             state.pullingStatus = 'succeeded';
             let fetched = [];
             for(let key in action.payload) {
-                action.payload[key].map(el => {
-                    return fetched.push(el);
-                })
+                fetched.push(action.payload[key]);
             }
             state.icecreams = fetched;
         })
@@ -47,7 +52,5 @@ const icecreamsSlice = createSlice({
         })
     }
 })
-
-export const { ADDNEWICECREAM } = icecreamsSlice.actions;
 
 export default icecreamsSlice.reducer;

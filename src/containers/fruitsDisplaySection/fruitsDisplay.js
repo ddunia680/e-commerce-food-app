@@ -14,6 +14,7 @@ function FruitDisplay() {
     let fruits = useSelector(state => state.fruits.fruits);
     let dispatch = useDispatch();
     // console.log(fruits);
+    // console.log(pullingStatus);
     let scrl = useRef();
 
     useEffect(() => {

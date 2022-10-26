@@ -1,10 +1,21 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "../axios-orders";
 
+
+export const pushToSoftDrinks = createAsyncThunk(
+    'data/pushToSoftDrinks',
+    (data) => {
+        return axios.post('/softDrinksList.json', data).then(res => {
+            console.log(res.data);
+            return res.data;
+        })
+    }
+);
+
 export const pullSoftDrinks = createAsyncThunk(
     'data/pulledArticles',
     () => {
-        return axios.get('/softDrinks.json').then(res => {
+        return axios.get('/softDrinksList.json').then(res => {
             // console.log(res.data);
             return res.data;
         })
@@ -21,11 +32,6 @@ const softDrinksSlice = createSlice({
     },
 
     reducers: {
-        ADDNEWDRINK: (state, action) => {
-            let type = action.payload.type;
-            let data = action.payload.data;
-            state.articles[type].push(data);
-        }
     }, extraReducers(builder) {
         builder
         .addCase(pullSoftDrinks.pending, (state, action) => {
@@ -35,9 +41,7 @@ const softDrinksSlice = createSlice({
             state.pullingStatus = 'succeeded';
             let fetched = [];
             for(let key in action.payload) {
-                action.payload[key].map(el => {
-                    return fetched.push(el);
-                })
+                fetched.push(action.payload[key]);
             }
             state.softDrinks = fetched;
         })
@@ -47,7 +51,5 @@ const softDrinksSlice = createSlice({
         })
     }
 })
-
-export const { ADDNEWDRINK } = softDrinksSlice.actions;
 
 export default softDrinksSlice.reducer;
