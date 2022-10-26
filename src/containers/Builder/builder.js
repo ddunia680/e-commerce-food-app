@@ -7,11 +7,11 @@ import CartModal from '../../components/cartModal/cartModal';
 import Dropdown from '../../components/headerDropdown/dropdown';
 import AddNewItem from '../addNewItemView/addNewItem';
 import Spinner from '../../UI/Spinner/spinner';
-import { pullArticles } from '../../store/articles';
+// import { pullArticles } from '../../store/articles';
 
 
 import classes from './builder.module.css';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 // import Provisuary from '../../components/Provisuary/Provisuary';
 
 function Builder(props) {
@@ -26,7 +26,7 @@ function Builder(props) {
 
     // console.log(articles);
     useEffect(() => {
-        dispatch(pullArticles())
+        // dispatch(pullArticles())
     }, []);
 
     const showToolbarDrop = () => {
@@ -68,7 +68,7 @@ function Builder(props) {
                                     addClicked = {showAddModalHandler}
                                 />: null
                 }
-                <AddNewItem show={showAddModal} remove={hideModalHandler} touched={addModalTouched}/>
+                {/* <AddNewItem show={showAddModal} remove={hideModalHandler} touched={addModalTouched}/> */}
                 {/* <Provisuary/> */}
             </>
         )

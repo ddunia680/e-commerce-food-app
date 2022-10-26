@@ -6,7 +6,7 @@ import cloud from './icons/cloud.png';
 import residence from './icons/residence.png';
 import dollar from './icons/dollar.png';
 import { useDispatch } from 'react-redux';
-import { ADDNEWARTICLE } from '../../store/articles';
+// import { ADDNEWARTICLE } from '../../store/articles';
 
 function AddNewItem(props) {
     const title = useRef();
@@ -114,7 +114,7 @@ function AddNewItem(props) {
             }
         }
         console.log(dataToSend);
-        dispatch(ADDNEWARTICLE(dataToSend));
+        // dispatch(ADDNEWARTICLE(dataToSend));
         setModalMessage('Article Added!');
         setAddedModalClasses([classes.addedConfirm, classes.Addedvisible]);
         setTimeout(() => {
