@@ -6,15 +6,19 @@ import cloud from './icons/cloud.png';
 import residence from './icons/residence.png';
 import dollar from './icons/dollar.png';
 import { useDispatch } from 'react-redux';
+import { storage } from '../../firebase';
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import { v4 } from 'uuid';
+import Spinner from '../../UI/Spinner/spinner';
 
 
-import { pushToChickens } from '../../store/chickens';
-import { pushToCurries } from '../../store/curries';
-import { pushToFishes } from '../../store/fishes';
-import { pushToFruits } from '../../store/fruits';
-import { pushToIceCreams } from '../../store/icecreams';
-import { pushToRices } from '../../store/rices';
-import { pushToSoftDrinks } from '../../store/softDrinks';
+import { pushToChickens, pullChickens } from '../../store/chickens';
+import { pushToCurries, pullCurries } from '../../store/curries';
+import { pushToFishes, pullFishes } from '../../store/fishes';
+import { pushToFruits, pullFruits } from '../../store/fruits';
+import { pushToIceCreams, pullIcecreams } from '../../store/icecreams';
+import { pushToRices, pullRices } from '../../store/rices';
+import { pushToSoftDrinks, pullSoftDrinks } from '../../store/softDrinks';
 
 function AddNewItem(props) {
     const title = useRef();
@@ -29,8 +33,10 @@ function AddNewItem(props) {
     let [updateMclasses, setMclasses] = useState(false);
     let [addedModalClasses, setAddedModalClasses] = useState([]);
     let [modalDisplayMessage, setModalMessage] = useState('');
+    let [loading, setLoading] = useState(false);
     let uplaodInput = useRef();
     let dispatch = useDispatch();
+    // let [url, setUrl] = useState();
 
     // console.log(formValues);
     const dishes = ['Chickens', 'Curries', 'Rices', 'Fishes', 'Fruits', 'Icecreams', 'Soft Drinks'];
@@ -88,7 +94,7 @@ function AddNewItem(props) {
 
     const storeUploadedFile = (event) => {
         if(event.target.files && event.target.files[0]) {
-            setUploadedImage(URL.createObjectURL(event.target.files[0]));
+            setUploadedImage(event.target.files[0]);
             setMclasses(true);
             setModalMessage('File Added');
         }
@@ -109,43 +115,65 @@ function AddNewItem(props) {
         }
     }, [uploadedImage]);
 
-console.log(uploadedImage);
     const submitData = () => {
-        const dataToSend = {
-                image: uploadedImage,
+        setLoading(true);
+        if(uploadedImage === null) return;
+
+        //here we are using the ref to define where in firebase we are going to store the image
+        const imageRef = ref(storage, `images/${uploadedImage.name + v4()}`);
+        uploadBytes(imageRef, uploadedImage).then((snapshot) => {
+            setLoading(false);
+            getDownloadURL(snapshot.ref).then(url => {
+                return url;
+            }).then(res => {
+                const dataToSend = {
+                image: res,
                 name: formValues.title,
                 calories: +formValues.calories,
                 price: +formValues.price,
-                id: Math.random * 100
+                id: Math.random() * 100
         }
         console.log(dataToSend);
         switch (formValues.category) {
-            case 'Chicken':
-                dispatch(pushToChickens(dataToSend));
+            case 'Chickens':
+                dispatch(pushToChickens(dataToSend)).then(res => {
+                    dispatch(pullChickens());
+                });
                 break;
             case 'Curries':
-                dispatch(pushToCurries(dataToSend));
+                dispatch(pushToCurries(dataToSend)).then(res => {
+                    dispatch(pullCurries());
+                });               
                 break;
             case 'Rices':
-                dispatch(pushToRices(dataToSend));
+                dispatch(pushToRices(dataToSend)).then(res => {
+                    dispatch(pullRices());
+                });
                 break;
             case 'Fishes':
-                dispatch(pushToFishes(dataToSend));
+                dispatch(pushToFishes(dataToSend)).then(res => {
+                    dispatch(pullFishes());
+                });               
                 break;
             case 'Fruits':
-                dispatch(pushToFruits(dataToSend));
+                dispatch(pushToFruits(dataToSend)).then(res => {
+                    dispatch(pullFruits());
+                });                
                 break;
             case 'Icecreams':
-                dispatch(pushToIceCreams(dataToSend));
+                dispatch(pushToIceCreams(dataToSend)).then(res => {
+                    dispatch(pullIcecreams());
+                });               
                 break;
             case 'Soft Drinks':
-                dispatch(pushToSoftDrinks(dataToSend));
+                dispatch(pushToSoftDrinks(dataToSend)).then(res => {
+                    dispatch(pullSoftDrinks());
+                });
                 break;
         
             default:
                 break;
         }
-        // dispatch(ADDNEWARTICLE(dataToSend));
         setModalMessage('Article Added!');
         setAddedModalClasses([classes.addedConfirm, classes.Addedvisible]);
         setTimeout(() => {
@@ -156,15 +184,19 @@ console.log(uploadedImage);
                 setFormValues({title: '', category: 'chickens', calories: '', price: ''});
                 setUploadedImage(null);
                 setMclasses(false);
+                setTouched({title: false, calories: false, price: false});
+                setformValidity(false);
             }, 500);
             
         }, 2000);
+            })
+        });
+        
     }
-    // console.log(addedModalClasses);
     return (
         <div className={wrapperClasses.join(' ')}>
             <div className={classes.frame1}>
-                    <p className={addedModalClasses.join(' ')}>{modalDisplayMessage}</p>
+                    { !loading ? <p className={addedModalClasses.join(' ')}>{modalDisplayMessage}</p>: <Spinner/>}
                 
                 <div 
                     className={`${classes.inputDiv} ${touched.title ? !titleValid ? classes.invalid: null : null}`}
@@ -206,7 +238,7 @@ console.log(uploadedImage);
                 </div> :
                 <div className={classes.uploadDiv}>
                     <div className={classes.uploaded}>
-                        <img src={uploadedImage} alt=''/>
+                        <img src={URL.createObjectURL(uploadedImage)} alt=''/>
                     </div>
                 </div> }
                     

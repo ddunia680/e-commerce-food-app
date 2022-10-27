@@ -6,7 +6,7 @@ import { ADDTOCART, CLEARCART, DELETETOCART } from '../../store/cartElements';
 import classes from './cartModal.module.css';
 import arrow from './images/arrow.png';
 import cancelIcon from './images/cancel.png';
-// import cartEmpty from './images/emptyCart.svg';
+import cartEmpty from './images/emptyCart.svg';
 
 function CartModal(props) {
     const [decider, setDecider] = useState([classes.wrapper, classes.initialView]);
@@ -17,8 +17,8 @@ function CartModal(props) {
     const filteredCart = [];
     const count= [];
 
-    // // console.log(cartElements);
-    // console.log(filteredCart);
+    // console.log(cartElements.length);
+    // console.log(filteredCart.length);
     // console.log(count);
 
     for(let el of cartElements) {
@@ -67,42 +67,44 @@ function CartModal(props) {
                     <span><img src={cancelIcon} alt=''/></span>
                 </button>
             </header>
-            <div className={classes.detailsWrapper}>
-                <div className={classes.addedItems}>
-                    {filteredCart.map(cartEl => {
-                        return <Control 
-                                    image={cartEl.image} 
-                                    name={cartEl.name}
-                                    price={cartEl.price}
-                                    count={count.filter(el => el === cartEl.name).length}
-                                    deleteEl={() => deleteItemHandler(cartEl.name, cartEl.price)}
-                                    addNewEl={() => 
-                                        addItemToCart([
-                                            cartEl.image, 
-                                            cartEl.name, 
-                                            cartEl.calories, 
-                                            cartEl.price, 
-                                            cartEl.id]
-                                        )}
-                                    key={cartEl.id}
-                                />
-                    })}
-                </div>
-                <div className={classes.checkoutDiv}>
-                    <div><h4>Sub Total</h4><h4>$ {totalPrice}</h4></div>
-                    <div><h4>Delivery</h4><h4>$ 2.5</h4></div>
-                    <div><hr/></div>
-                    <div><h3>Total</h3><h3>${totalPrice + 2.5}</h3></div>
-                    <div>
-                        <button className={classes.checkoutBtn}>Check Out</button>
-                    </div>
-                </div>
-                
-            </div>
-            {/* <div className={classes.noItems}>
+            { cartElements.length === 0 ? 
+            <div className={classes.noItems}>
                 <img src={cartEmpty} alt=''/>
                 <h2>Add some items to your cart</h2>
-            </div> */}
+            </div>:
+            <div className={classes.detailsWrapper}>
+            <div className={classes.addedItems}>
+                {filteredCart.map(cartEl => {
+                    return <Control 
+                                image={cartEl.image} 
+                                name={cartEl.name}
+                                price={cartEl.price}
+                                count={count.filter(el => el === cartEl.name).length}
+                                deleteEl={() => deleteItemHandler(cartEl.name, cartEl.price)}
+                                addNewEl={() => 
+                                    addItemToCart([
+                                        cartEl.image, 
+                                        cartEl.name, 
+                                        cartEl.calories, 
+                                        cartEl.price, 
+                                        cartEl.id]
+                                    )}
+                                key={cartEl.id}
+                            />
+                })}
+            </div>
+            <div className={classes.checkoutDiv}>
+                <div><h4>Sub Total</h4><h4>$ {totalPrice}</h4></div>
+                <div><h4>Delivery</h4><h4>$ 2.5</h4></div>
+                <div><hr/></div>
+                <div><h3>Total</h3><h3>${totalPrice + 2.5}</h3></div>
+                <div>
+                    <button className={classes.checkoutBtn}>Check Out</button>
+                </div>
+            </div>
+            
+        </div> 
+        }
             
         </div>
     );

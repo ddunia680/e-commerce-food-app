@@ -26,7 +26,7 @@ function DishesDisplay() {
 
     const dishes = ['Chicken', 'Curry', 'Rice', 'Fish', 'Icecreams', 'Soft Drinks'];
 
-    console.log(icecreams);
+    // console.log(icecreams);
     
     const displayDishesHandler = (dish) => {
         switch(dish) {
