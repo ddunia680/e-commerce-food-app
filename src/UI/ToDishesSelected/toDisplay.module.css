@@ -1,6 +1,6 @@
 .wrapper {
     width: 70%;
-    height: 200px;
+    height: 300px;
     /* border: 1px solid rgb(68, 43, 43); */
     display: flex;
     flex-flow: row wrap;
@@ -10,6 +10,18 @@
 }
 
 .wrapper img {
-    width: 200px;
-    height: 200px;
+    width: 40%;
+    height: 100%;
+}
+
+@media (max-width: 600px) {
+    .wrapper {
+        width: 90%;
+        height: 100px;
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: center;
+        align-items: center;
+        margin: auto;
+    }
 }
