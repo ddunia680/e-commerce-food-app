@@ -28,9 +28,11 @@ function dropdown(props) {
                     <span><img src={plus} alt=''/></span>
             </div>
             {navItems}
-            <p onClick={props.clicked} className={classes.logout}>Logout
+            <div onClick={props.clicked} className={classes.logout}>
+                Logout
                 <span><img src={arrowFrame} alt=''/></span>
-            </p>   
+            </div>
+              
         </div>
         </>
     );
