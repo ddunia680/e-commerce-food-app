@@ -114,12 +114,34 @@
    flex-flow: row wrap;
    justify-content: center;
    align-items: center;
+   position: relative;
  }
  .uploaded img{
    width: 70%;
    height: 70%;
  }
 
+ .uploaded button {
+   position: absolute;
+   left: 70%;
+   bottom: 30px;
+   border-radius: 50%;
+   width: 50px;
+   height: 50px;
+   font-size: 20px;
+   color: white;
+   background-color: rgb(233, 29, 29);
+   border: none;
+   box-shadow: 0 0 20px 2px rgb(233, 29, 29);
+   font-weight: bold;
+ }
+
+ .uploaded button:hover {
+   background-color: rgb(233, 29, 29);
+   box-shadow: 0 0 20px 2px rgb(107, 12, 12);
+   color: wheat;
+   
+ }
  .uploadDiv h3 {
     color: rgb(71,74,85);
     font-size: 17px;
@@ -240,6 +262,25 @@
    display: none;
  }
 
+ .cancelBtn {
+   position: absolute;
+   left: 20px;
+   top: 40px;
+   border-radius: 50%;
+   width: 50px;
+   height: 50px;
+   font-size: 20px;
+   background-color: #ccc;
+   border: none;
+   box-shadow: 0 0 20px 2px #ccc;
+   font-weight: bold;
+ }
+
+ .cancelBtn:hover {
+   background-color: rgb(174, 171, 171);
+   box-shadow: 0 0 20px 2px rgb(137, 135, 135);
+ }
+
  @media (max-width: 600px) {
     .wrapper {
         height: 100vh;
@@ -313,6 +354,7 @@
     .buttonWrapper {
         height: 30px;
         justify-content: center;
+        margin: 0;
     }
 
     .buttonWrapper button {
@@ -321,6 +363,22 @@
         width: 150px;
         height: 30px;
      }
+
+   .cancelBtn {
+      left: 5px;
+      top: 30px;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      font-size: 12px;
+    }
+
+    .uploaded button {
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      font-size: 11px;
+    }
  }
 
  @media (max-width: 295px) {

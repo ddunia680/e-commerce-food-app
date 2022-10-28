@@ -1,0 +1,15 @@
+.wrapper {
+    width: 70%;
+    height: 200px;
+    /* border: 1px solid rgb(68, 43, 43); */
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+}
+
+.wrapper img {
+    width: 200px;
+    height: 200px;
+}

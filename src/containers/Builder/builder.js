@@ -6,12 +6,9 @@ import DishesDisplay from '../dishesDisplaySection/dishesDisplay';
 import CartModal from '../../components/cartModal/cartModal';
 import Dropdown from '../../components/headerDropdown/dropdown';
 import AddNewItem from '../addNewItemView/addNewItem';
-import Spinner from '../../UI/Spinner/spinner';
 
 
 import classes from './builder.module.css';
-import { useDispatch } from 'react-redux';
-// import Provisuary from '../../components/Provisuary/Provisuary';
 
 function Builder(props) {
     let [toolbarDrop, setToolbarDrop] = useState(false);
@@ -19,9 +16,6 @@ function Builder(props) {
     let [cartTouched, setCartTouched] = useState(false);
     let [showAddModal, setshowAddModal] = useState(false);
     let [addModalTouched, setAddModalTouched] = useState(false);
-    // let loadingState = useSelector(state => state.articles.pullingStatus);
-    // let {articles} = useSelector(state => state.articles.articles);
-    let dispatch = useDispatch();
 
     // console.log(articles);
     useEffect(() => {
@@ -53,6 +47,10 @@ function Builder(props) {
         setshowAddModal(false);
     }
 
+    window.addEventListener('scroll', () => {
+        setToolbarDrop(false);
+    })
+
     let operations;
 
     // if (loadingState === 'succeeded') {
@@ -68,12 +66,8 @@ function Builder(props) {
                                 />: null
                 }
                 <AddNewItem show={showAddModal} remove={hideModalHandler} touched={addModalTouched}/>
-                {/* <Provisuary/> */}
             </>
         )
-    // } else {
-    //     operations = <Spinner/>
-    // }
     return (
         <div className={classes.wrapper}>
             <Toolbar clicked={showToolbarDrop} showCartH={showCartHandler}/>

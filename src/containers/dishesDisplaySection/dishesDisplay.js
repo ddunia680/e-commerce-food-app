@@ -12,6 +12,7 @@ import { pullRices } from '../../store/rices';
 import { pullFishes } from '../../store/fishes';
 import { pullIcecreams } from '../../store/icecreams';
 import { pullSoftDrinks } from '../../store/softDrinks';
+import UIHelper from '../../UI/ToDishesSelected/UIHelper';
 
 
 function DishesDisplay() {
@@ -78,7 +79,8 @@ function DishesDisplay() {
                 </div>
             </div>
             <div className={classes.itemsWrapper}>
-                {chickens.map(el => {
+                {!chickens.length ? <UIHelper/> : 
+                chickens.map(el => {
                     return <FruitItem image={el.image} name={el.name} calories={el.calories} price={el.price} key={el.id} id={el.id}/>
                 })}
             </div>

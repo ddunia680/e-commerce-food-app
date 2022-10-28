@@ -36,12 +36,10 @@ function AddNewItem(props) {
     let [loading, setLoading] = useState(false);
     let uplaodInput = useRef();
     let dispatch = useDispatch();
-    // let [url, setUrl] = useState();
 
-    // console.log(formValues);
     const dishes = ['Chickens', 'Curries', 'Rices', 'Fishes', 'Fruits', 'Icecreams', 'Soft Drinks'];
 
-    const wrapperClasses = [classes.wrapper, !props.touched ? classes.initial : props.show ? classes.visible : classes.invisible];
+    let wrapperClasses = [classes.wrapper, !props.touched ? classes.initial : props.show ? classes.visible : classes.invisible];
 
 
     // console.log(uploadedImage);
@@ -112,6 +110,8 @@ function AddNewItem(props) {
                     setAddedModalClasses([classes.unMount]);
                 }, 300);
             }, 3000);
+        } else {
+            setAddedModalClasses([]);
         }
     }, [uploadedImage]);
 
@@ -189,12 +189,27 @@ function AddNewItem(props) {
             }, 500);
             
         }, 2000);
-            })
+            });
         });
         
     }
+
+    const closeWindow = () => {
+        props.remove();
+        setAddedModalClasses([classes.addedConfirm, classes.initialState]);
+        setFormValues({title: '', category: 'chickens', calories: '', price: ''});
+        setUploadedImage(null);
+        setMclasses(false);
+        setTouched({title: false, calories: false, price: false});
+        setformValidity(false);
+    }
     return (
         <div className={wrapperClasses.join(' ')}>
+            <button 
+                className={classes.cancelBtn} 
+                onClick={closeWindow}
+                title='Click to Cancel'
+            >X</button>
             <div className={classes.frame1}>
                     { !loading ? <p className={addedModalClasses.join(' ')}>{modalDisplayMessage}</p>: <Spinner/>}
                 
@@ -238,6 +253,9 @@ function AddNewItem(props) {
                 </div> :
                 <div className={classes.uploadDiv}>
                     <div className={classes.uploaded}>
+                        <button title='Cancel Image' onClick={() => {setUploadedImage('');
+                        setModalMessage('');
+                        }}>X</button>
                         <img src={URL.createObjectURL(uploadedImage)} alt=''/>
                     </div>
                 </div> }
