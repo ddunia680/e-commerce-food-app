@@ -209,7 +209,7 @@ function AddNewItem(props) {
                 className={classes.cancelBtn} 
                 onClick={closeWindow}
                 title='Click to Cancel'
-            >X</button>
+            >x</button>
             <div className={classes.frame1}>
                     { !loading ? <p className={addedModalClasses.join(' ')}>{modalDisplayMessage}</p>: <Spinner/>}
                 
@@ -255,7 +255,7 @@ function AddNewItem(props) {
                     <div className={classes.uploaded}>
                         <button title='Cancel Image' onClick={() => {setUploadedImage('');
                         setModalMessage('');
-                        }}>X</button>
+                        }}>x</button>
                         <img src={URL.createObjectURL(uploadedImage)} alt=''/>
                     </div>
                 </div> }

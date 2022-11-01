@@ -1,34 +1,51 @@
 import React from 'react';
 import NavItem from '../toolbar/navItems/navItem/navItem';
 
+import { signOut } from 'firebase/auth';
+
 import classes from './dropdown.module.css';
 import plus from './icons/plus.png';
-import arrowFrame from './icons/arrowFrame.png'
+import arrowFrame from './icons/arrowFrame.png';
 
-function dropdown(props) {
+import { LOGUSEROUT } from '../../store/authentication';
+import { Authenticate } from '../../firebase';
+import { useDispatch, useSelector } from 'react-redux';
 
+function Dropdown(props) {
+    let dispatch = useDispatch();
+    let email = useSelector(state => state.Authenticate.emailAddress);
     const names = ['Home','Menu', 'About Us', 'Services'];
 
     let navItems = names.map(el => {
         return <NavItem name={el} key={el} />
     });
+
+    const LogoutHandler = () => {
+        props.clicked();
+        signOut(Authenticate);
+        dispatch(LOGUSEROUT());
+        console.log('User Logged Out');
+    }
+
     return (
         <>
         <div className={classes.wrapper1}>
-            <div onClick={props.addClicked} className={classes.add}>New Item
+            { email === 'ddunia680@gmail.com' ?<><div onClick={props.addClicked} className={classes.add}>New Item
                 <span><img src={plus} alt=''/></span>
-            </div>
+            </div> 
             <hr/>
-            <div onClick={props.clicked} className={classes.logout}>Logout
+            </>
+            : null}
+            <div onClick={LogoutHandler} className={classes.logout}>Logout
                 <span><img src={arrowFrame} alt=''/></span>
             </div>
         </div>
         <div className={classes.wrapper2}>
-            <div onClick={props.addClicked} className={classes.add}>New Item
+            {email === 'ddunia680@gmail.com' ? <div onClick={props.addClicked} className={classes.add}>New Item
                     <span><img src={plus} alt=''/></span>
-            </div>
+            </div> : null}
             {navItems}
-            <div onClick={props.clicked} className={classes.logout}>
+            <div onClick={LogoutHandler} className={classes.logout}>
                 Logout
                 <span><img src={arrowFrame} alt=''/></span>
             </div>
@@ -38,4 +55,4 @@ function dropdown(props) {
     );
 }
 
-export default dropdown;
+export default Dropdown;

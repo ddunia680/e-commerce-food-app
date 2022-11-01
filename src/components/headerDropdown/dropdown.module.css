@@ -1,6 +1,6 @@
 .wrapper1 {
     width: 200px;
-    height: 100px;
+    height: fit-content;
     background-color: white;
     border-radius: 10px;
     position: fixed;
@@ -23,7 +23,7 @@
 
 .wrapper1 div {
     width: 90%;
-    height: 45%;
+    height: 40px;
     /* background-color: azure; */
     display: flex;
     flex-flow: row wrap;

@@ -2,7 +2,7 @@ import React from 'react';
 
 import classes from './sectionHeader.module.css';
 
-function sectionHeader(props) {
+function SectionHeader(props) {    
     return (
         <div className={classes.wrapper}>
             <div className={classes.left}>
@@ -24,4 +24,4 @@ function sectionHeader(props) {
     );
 }
 
-export default sectionHeader;
+export default SectionHeader;

@@ -4,9 +4,42 @@ import NavItems from './navItems/navItems';
 import CartButton from '../../UI/cartButton/cartButton';
 import LoginButton from '../../UI/LoginButton/loginButton';
 
-import classes from './toolbar.module.css';
+import { GoogleAuthProvider, signInWithPopup} from 'firebase/auth';
+import { Authenticate } from '../../firebase';
 
-function toolbar(props) {
+import { LOGUSERIN } from '../../store/authentication';
+
+import classes from './toolbar.module.css';
+import { useDispatch} from 'react-redux';
+
+const provider = new GoogleAuthProvider();
+
+function Toolbar(props) {
+    // const token = useSelector(state => state.Authenticate.token);
+    let dispatch = useDispatch();
+    // console.log(token);
+
+    const handleGoogleSignin = () => {
+        signInWithPopup(Authenticate, provider)
+        .then(response => {
+            const credentials = GoogleAuthProvider.credentialFromResult(response);
+            const user = {
+                name: response.user.displayName,
+                photo: response.user.photoURL,
+                emailAddress: response.user.email
+            };
+            const token = credentials.accessToken;
+            const toStore = {
+                user: user,
+                token: token
+            }
+            dispatch(LOGUSERIN(toStore));
+        }).catch(error => {
+            console.log(error);
+        }) 
+    };
+
+
     return (
         <div>
             <header className={classes.toolbar}>
@@ -20,7 +53,7 @@ function toolbar(props) {
                     </div>
                     <div className={classes.lastPart}>
                         <CartButton clicked={props.showCartH}/>
-                        <LoginButton clicked={props.clicked}/>
+                        <LoginButton showDropdown={props.clicked} login={handleGoogleSignin}/>
                     </div>
                 </div>
                 
@@ -32,7 +65,7 @@ function toolbar(props) {
                         <Logo/>
                     </div>
                     <div className={classes.right}>
-                        <LoginButton clicked={props.clicked}/>
+                        <LoginButton showDropdown={props.clicked} login={handleGoogleSignin}/>
                     </div>
                 </div>
             </header>
@@ -41,4 +74,4 @@ function toolbar(props) {
     );
 }
 
-export default toolbar;
+export default Toolbar;

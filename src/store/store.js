@@ -7,6 +7,7 @@ import fruitsSlice from "./fruits";
 import icecreamsSlice from "./icecreams";
 import ricesSlice from "./rices";
 import softDrinksSlice from "./softDrinks";
+import Authentication from "./authentication";
 
 const store = configureStore({
     reducer: {
@@ -17,7 +18,8 @@ const store = configureStore({
         fruits: fruitsSlice,
         icecreams: icecreamsSlice,
         rices: ricesSlice,
-        softDrinks: softDrinksSlice
+        softDrinks: softDrinksSlice,
+        Authenticate: Authentication
     }, 
 });
 

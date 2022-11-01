@@ -134,6 +134,10 @@
    border: none;
    box-shadow: 0 0 20px 2px rgb(233, 29, 29);
    font-weight: bold;
+   display: flex;
+   flex-flow: row wrap;
+   justify-content: center;
+   align-items: center;
  }
 
  .uploaded button:hover {
@@ -274,6 +278,10 @@
    border: none;
    box-shadow: 0 0 20px 2px #ccc;
    font-weight: bold;
+   display: flex;
+   flex-flow: row wrap;
+   justify-content: center;
+   align-items: center;
  }
 
  .cancelBtn:hover {
