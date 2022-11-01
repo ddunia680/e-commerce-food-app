@@ -1,5 +1,6 @@
 .navItems {
     display: flex;
-    flex-flow: row wrap;
+    flex-flow: row nowrap;
     justify-content: flex-end;
+    /* background-color: aqua; */
 }

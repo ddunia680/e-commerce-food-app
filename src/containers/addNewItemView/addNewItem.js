@@ -99,6 +99,7 @@ function AddNewItem(props) {
     }
     useEffect(() => {
         setAddedModalClasses([classes.addedConfirm, !updateMclasses ? classes.initialState : !uploadedImage ? null : classes.Addedvisible]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [uploadedImage]);
     
 
@@ -133,7 +134,7 @@ function AddNewItem(props) {
                 price: +formValues.price,
                 id: Math.random() * 100
         }
-        console.log(dataToSend);
+        // console.log(dataToSend);
         switch (formValues.category) {
             case 'Chickens':
                 dispatch(pushToChickens(dataToSend)).then(res => {
