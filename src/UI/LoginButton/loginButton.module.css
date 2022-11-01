@@ -3,6 +3,7 @@
     height: 80px;
     border: none;
     flex-basis: 100px;
+    background-color: inherit;
 }
 
 .avatar img {

@@ -25,6 +25,7 @@ function FruitItem(props) {
                 <div>
                     <img 
                         src={backet} alt='' 
+                        title='Click to ad to cart'
                         onClick={() => dispatch(ADDTOCART(data))}
                     />
                 </div>
