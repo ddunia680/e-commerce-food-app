@@ -77,3 +77,21 @@
     }
   }
   
+
+  @media (max-width: 600px) {
+    .ldsSpinner {
+      width: 40px;
+      height: 40px;
+    }
+    .ldsSpinner div {
+      transform-origin: 20px 20px;
+    }
+    .ldsSpinner div:after {
+      top: 1.5px;
+      left: 18px;
+      width: 3px;
+      height: 9px;
+      border-radius: 20%;
+      background: rgb(84, 82, 82);
+    }
+  }

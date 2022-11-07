@@ -37,7 +37,14 @@ function FruitDisplay() {
 
     let items;
     if(pullingStatus === 'loading') {
-        items = <Spinner/>
+        items = 
+        <>
+            <div className={classes.loader}><Spinner/></div>
+            <div className={classes.loader}><Spinner/></div>
+            <div className={classes.loader}><Spinner/></div>
+            <div className={classes.loader}><Spinner/></div>
+            <div className={classes.loader}><Spinner/></div>
+        </>
     } else {
         items = fruits.map(el => {
             return <FruitItem image={el.image} name={el.name} calories={el.calories} price={el.price} key={el.id} id={el.id}/>
