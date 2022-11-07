@@ -6,16 +6,18 @@ import DishesDisplay from '../dishesDisplaySection/dishesDisplay';
 import CartModal from '../../components/cartModal/cartModal';
 import Dropdown from '../../components/headerDropdown/dropdown';
 import AddNewItem from '../addNewItemView/addNewItem';
+import Checkout from '../../components/checkout/checkout';
+import Backdrop from '../../UI/backdrop/backdrop';
 
-
+import Transition from 'react-transition-group/Transition';
 import classes from './builder.module.css';
 
 function Builder(props) {
     let [toolbarDrop, setToolbarDrop] = useState(false);
     let [showCart, setCartVisibility] = useState(false);
-    let [cartTouched, setCartTouched] = useState(false);
     let [showAddModal, setshowAddModal] = useState(false);
     let [addModalTouched, setAddModalTouched] = useState(false);
+    let [checkout, setCheckout] = useState(false);
 
     // console.log(articles);
     useEffect(() => {
@@ -30,7 +32,6 @@ function Builder(props) {
     }
 
     const showCartHandler = () => {
-        setCartTouched(true);
         setCartVisibility(true);
     }
     const rmvCartHandler = () => {
@@ -49,7 +50,14 @@ function Builder(props) {
 
     window.addEventListener('scroll', () => {
         setToolbarDrop(false);
-    })
+    });
+
+    const AddCheckout = () => {
+        setCheckout(true);
+    }
+    const rmvCheckout = () => {
+        setCheckout(false);
+    }
 
     let operations;
 
@@ -59,7 +67,15 @@ function Builder(props) {
                 <WelcomeSection/>
                 <FruitDisplay/>
                 <DishesDisplay/>
-                <CartModal visible={showCart} removeCart={rmvCartHandler} touched={cartTouched}/>
+                <Transition
+                    in={showCart}
+                    timeout={500}
+                    mountOnEnter
+                    unmountOnExit
+                >
+                    <CartModal visible={showCart} removeCart={rmvCartHandler} addCheck={AddCheckout}/>
+                </Transition>
+                
                 {toolbarDrop ? <Dropdown 
                                     clicked={removeToolbarDrop} 
                                     addClicked = {showAddModalHandler}
@@ -72,7 +88,17 @@ function Builder(props) {
         <div className={classes.wrapper}>
             <Toolbar clicked={showToolbarDrop} showCartH={showCartHandler}/>
             {operations}
-
+            { checkout ? <Backdrop /> : null}
+            <Transition
+                in={checkout}
+                timeout={500}
+                mountOnEnter
+                unmountOnExit
+            >
+                {state => (
+                    <Checkout checkout={checkout} rmvCheck={rmvCheckout}/>
+                )}
+            </Transition>
         </div>
     );
 }

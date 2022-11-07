@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Control from '../Control/control';
 import { ADDTOCART, CLEARCART, DELETETOCART } from '../../store/cartElements';
@@ -9,7 +9,6 @@ import cancelIcon from './images/cancel.png';
 import cartEmpty from './images/emptyCart.svg';
 
 function CartModal(props) {
-    const [decider, setDecider] = useState([classes.wrapper, classes.initialView]);
     const cartElements = useSelector(state => state.cartElements.cartElements);
     const totalPrice = useSelector(state => state.cartElements.totalPrice);
     const dispatch = useDispatch();
@@ -17,9 +16,7 @@ function CartModal(props) {
     const filteredCart = [];
     const count= [];
 
-    // console.log(cartElements.length);
-    // console.log(filteredCart.length);
-    // console.log(count);
+    const decider = [classes.wrapper, props.visible ? classes.visible : classes.invisible]
 
     for(let el of cartElements) {
         if (!filteredCart.find(newEl => newEl.name === el.name)) {
@@ -29,12 +26,6 @@ function CartModal(props) {
             count.push(el.name);
         }
     }
-
-    useEffect(() => {
-        if(props.touched) {
-            setDecider([classes.wrapper, props.visible ? classes.visible : classes.invisible]);
-        }  
-    }, [props.touched, props.visible, props.invisible]);
 
     const clearModal = () => {
         dispatch(CLEARCART());
@@ -54,6 +45,11 @@ function CartModal(props) {
             id: array[4]
         }
         dispatch(ADDTOCART(data));
+    }
+
+    const Checkout = () => {
+        props.removeCart();
+        props.addCheck();
     }
     
 
@@ -99,7 +95,9 @@ function CartModal(props) {
                 <div><hr/></div>
                 <div><h3>Total</h3><h3>${totalPrice + 2.5}</h3></div>
                 <div>
-                    <button className={classes.checkoutBtn}>Check Out</button>
+                    <button className={classes.checkoutBtn} onClick={Checkout}>
+                        Check Out
+                    </button>
                 </div>
             </div>
             

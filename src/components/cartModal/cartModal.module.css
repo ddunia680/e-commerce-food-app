@@ -11,10 +11,6 @@
     /* display: none; */
 }
 
-.initialView {
-    display: none;
-}
-
 .visible {
     animation: showModal 0.3s ease-in-out forwards;
 }
@@ -140,6 +136,13 @@
     color: white;
     border-radius: 20px;
     margin-top: 20px;
+    transition: all 300ms ease-in-out;
+}
+
+.checkoutBtn:hover {
+    background-color: rgb(166, 74, 4);
+    color: rgb(244, 204, 174);
+    transition: all 300ms ease-in-out;
 }
 
 .noItems {
