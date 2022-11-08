@@ -10,6 +10,7 @@
     width: 100px;
     height: 80px;
     align-self: flex-end;
+    transition: all 500ms ease-in-out;
   }
    .cart img{
     width: 100%;
@@ -17,6 +18,7 @@
    }
   .cart:hover {
     background: red;
+    transition: all 500ms ease-in-out;
   }
   
 .badge {

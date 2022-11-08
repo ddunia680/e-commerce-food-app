@@ -4,6 +4,7 @@ import { postData } from '../../store/orders';
 import Spinner from '../../UI/Spinner/spinner';
 import {FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faThumbsUp } from '@fortawesome/free-solid-svg-icons';
+import { CLEARCART } from '../../store/cartElements';
 
 import classes from './checkout.module.css';
 function Checkout(props) {
@@ -21,13 +22,12 @@ function Checkout(props) {
             ...values,
             totalPrice: totalPrice + 2.5
         };
-        dispatch(postData(data));
-        if(status === 'succeeded') {
-            setTimeout(() => {
-                props.rmvCheck();
-            }, 500);
+        dispatch(postData(data)).then(res => {
+             props.rmvCheck();
+             dispatch(CLEARCART());
+        });
+               
         }
-    }
     const values = [];
     for(let el of cart) {
         let theEl = values.find(item => item.name === el.name);
@@ -41,9 +41,9 @@ function Checkout(props) {
    console.log(status);
     let body;
     if(status === 'loading') {
-        body = <Spinner />
+        body = <Spinner className={classes.spin}/>
     } else if(status === 'succeeded') {
-        body = <FontAwesomeIcon icon={faThumbsUp} />
+        body = <FontAwesomeIcon icon={faThumbsUp} className={classes.icon}/>
     } else if(status === 'rejected') {
         body = <p>{error}</p>
     } else if(!status) {

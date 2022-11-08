@@ -6,6 +6,8 @@ import { signOut } from 'firebase/auth';
 import classes from './dropdown.module.css';
 import plus from './icons/plus.png';
 import arrowFrame from './icons/arrowFrame.png';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSignOut } from '@fortawesome/free-solid-svg-icons'
 
 import { LOGUSEROUT } from '../../store/authentication';
 import { Authenticate } from '../../firebase';
@@ -14,11 +16,7 @@ import { useDispatch, useSelector } from 'react-redux';
 function Dropdown(props) {
     let dispatch = useDispatch();
     let email = useSelector(state => state.Authenticate.emailAddress);
-    const names = ['Home','Menu', 'About Us', 'Services'];
-
-    let navItems = names.map(el => {
-        return <NavItem name={el} key={el} />
-    });
+    const classesWrp = email === 'ddunia680@gmail.com' ? classes.wrapper2 : classes.small;
 
     const LogoutHandler = () => {
         props.clicked();
@@ -40,14 +38,21 @@ function Dropdown(props) {
                 <span><img src={arrowFrame} alt=''/></span>
             </div>
         </div>
-        <div className={classes.wrapper2}>
+        <div className={classesWrp}>
             {email === 'ddunia680@gmail.com' ? <div onClick={props.addClicked} className={classes.add}>New Item
                     <span><img src={plus} alt=''/></span>
             </div> : null}
-            {navItems}
+            {email === 'ddunia680@gmail.com' ? 
+            <>
+                <NavItem name='Home' to='/' />
+                <NavItem name='Orders' to='/orders' />
+                <NavItem name='About Us' to='/about' />
+                <NavItem name='Services' to='/services' />
+            </> : null}
+                
             <div onClick={LogoutHandler} className={classes.logout}>
                 Logout
-                <span><img src={arrowFrame} alt=''/></span>
+                <span><FontAwesomeIcon icon={faSignOut}/></span>
             </div>
               
         </div>

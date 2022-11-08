@@ -3,7 +3,7 @@
     height: 400px;
     position: fixed;
     top: 30vh;
-    left: 35vw;
+    left: 30vw;
     z-index: 500;
     background-color: rgb(49,48,48);
     display: flex;
@@ -94,6 +94,12 @@
     background-color: orange;
     color: black;
 }
+.icon {
+    margin: auto auto;
+    font-size: 100px;
+    color: orange;
+    /* animation: all 500ms ease-in-out; */
+}
 
 @media (max-width: 600px) {
     .wrapper {
@@ -132,6 +138,10 @@
         right: 20%;
         bottom: 3%;
         font-size: 13px;
+    }
+
+    .icon {
+        font-size: 40px;
     }
     
 }

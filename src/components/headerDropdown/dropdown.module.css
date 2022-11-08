@@ -87,6 +87,24 @@
         align-items: center;
     }
 
+    .small {
+        width: 100px;
+        height: 30px;
+        /* overflow: hidden; */
+        top: 50px;
+        right: 20px;
+        z-index: 200;
+        box-shadow: 0 0 1px 1px #ccc;
+        border-radius: 10px;
+        position: fixed;
+        background-color: rgba(240,240,240, 0.1);
+        backdrop-filter: blur(100px);
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: flex-start;
+        align-items: center;
+    }
+
     .wrapper2 div {
         width: 90%;
         /* height: 30px; */
@@ -117,7 +135,7 @@
         border-radius: 5px;
         display: flex;
         flex-flow: row wrap;
-        justify-content: center;
+        justify-content: flex-start;
         align-items: center;
     }
 }
