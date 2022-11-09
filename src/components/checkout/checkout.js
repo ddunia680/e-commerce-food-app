@@ -5,6 +5,7 @@ import Spinner from '../../UI/Spinner/spinner';
 import {FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faThumbsUp } from '@fortawesome/free-solid-svg-icons';
 import { CLEARCART } from '../../store/cartElements';
+import { RESETSTATUS } from '../../store/orders';
 
 import classes from './checkout.module.css';
 function Checkout(props) {
@@ -18,18 +19,6 @@ function Checkout(props) {
     const wrapperClasses = [classes.wrapper, props.checkout ? classes.visible : classes.invisible];
     // console.log(cart);
 
-    const SendData = () => {
-        let data = {
-            ...values,
-            user: userName,
-            totalPrice: totalPrice + 2.5
-        };
-        dispatch(postData(data)).then(res => {
-             props.rmvCheck();
-             dispatch(CLEARCART());
-        });
-               
-        }
     const values = [];
     for(let el of cart) {
         let theEl = values.find(item => item.name === el.name);
@@ -40,7 +29,26 @@ function Checkout(props) {
             values.push({name: el.name, val: 1});
         }
     }
-   console.log(status);
+
+    let valuesToPost = {};
+    values.map(el => {
+        valuesToPost = {...valuesToPost, [el.name]: el.val};
+    });
+   console.log(valuesToPost);
+
+   const SendData = () => {
+    let data = {
+        ...valuesToPost,
+        user: userName,
+        totalPrice: totalPrice + 2.5
+    };
+    dispatch(postData(data)).then(res => {
+         props.rmvCheck();
+         dispatch(CLEARCART());
+         dispatch(RESETSTATUS());
+    });
+           
+    } 
     let body;
     if(status === 'loading') {
         body = <Spinner className={classes.spin}/>

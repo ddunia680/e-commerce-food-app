@@ -15,7 +15,7 @@ export const pullOrders = createAsyncThunk(
     'data/pullOrders',
     () => {
         return axios.get('/orders.json').then(res => {
-            console.log(res.data);
+            // console.log(res.data);
             return res.data;
         })
     }
@@ -24,11 +24,17 @@ export const pullOrders = createAsyncThunk(
 const orders =  createSlice({
     name: 'orders',
     initialState: {
-        orderDate: {},
+        orderData: {},
         loadingStatus: null,
         error: null,
         pulledOrders: {},
         pullingStatus: null
+    }, 
+    reducers: {
+        RESETSTATUS: (state, action) => {
+            state.loadingStatus = null;
+            state.orderData = {};
+        }
     },
     extraReducers(builder) {
         builder
@@ -56,5 +62,7 @@ const orders =  createSlice({
         })
     }
 });
+
+export const { RESETSTATUS } = orders.actions;
 
 export default orders.reducer;

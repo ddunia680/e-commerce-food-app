@@ -15,12 +15,27 @@ const Orders = (props) => {
         dispatch(pullOrders());
     }, []);
 
-
+    let orders = [];
+    if(pulledOrders) {
+        for(let item in pulledOrders) {
+            orders.push(pulledOrders[item]);
+        }
+    }
+    console.log(orders);
     return (
         <div>
             <Toolbar/>
             <div className={classes.body}>
-                <OrderItem/>
+                {orders.map(el => {
+                    let items = {};
+                    for(let itm in el) {
+                        if(itm !== 'totalPrice' && itm !== 'user') {
+                            items = {...items, [itm]: el[itm]};
+                        }
+                    }
+                    return <OrderItem name={el.user} items={items} price={el.totalPrice} key={Math.random() * 100}/>
+                })}
+                {/* <OrderItem/> */}
             </div>
         </div>
     );
