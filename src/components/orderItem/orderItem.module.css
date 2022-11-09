@@ -1,0 +1,103 @@
+.wrapper {
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    align-items: center;
+    /* background-color: aqua; */
+}
+
+.wrapper h3 {
+    width: fit-content;
+    /* background-color: cadetblue; */
+    border-bottom: 2px solid rgb(186, 142, 142) ;
+}
+
+.wrapper h3 span {
+    padding: 0 10px;
+}
+.wrapper div {
+    width: fit-content;
+    height: 50px;
+    background-color: rgb(186, 142, 142);
+    margin: 5px;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 0 10px;
+    border-radius: 5px;
+}
+
+.wrapper div span {
+    color: chocolate;
+    margin: 0 5px;
+}
+
+.totalP {
+    margin: 0 10px;
+}
+.proccess {
+    background-color: brown;
+    color: black;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    font-size: 17px;
+    transition: all 300ms ease-in-out;
+}
+
+.proccess:hover {
+    background-color: rgb(54, 14, 14);
+    color: rgb(166, 160, 160);
+    transition: all 300ms ease-in-out;
+}
+
+.iconProcess {
+    font-size: 40px;
+    padding: 0 20px;
+} 
+
+@media (max-width: 600px) {
+    .wrapper {
+        width: 980px;
+    }
+    .wrapper h3 {
+        width: fit-content;
+        border-bottom: 2px solid rgb(186, 142, 142);
+        font-size: 13px;
+    }
+    .wrapper h3 span {
+        padding: 0 5px;
+    }
+    .wrapper div {
+        height: 30px;
+        margin: 5px;
+        padding: 0 5px;
+        border-radius: 5px;
+        font-size: 13px;
+    }
+        
+    .totalP {
+        margin: 0 10px;
+        font-size: 13px;
+    }
+    .proccess {
+        padding: 5px 10px;
+        border: none;
+        border-radius: 5px;
+        font-size: 13px;
+        transition: all 300ms ease-in-out;
+    }
+
+    .proccess:hover {
+        background-color: rgb(54, 14, 14);
+        color: rgb(166, 160, 160);
+        transition: all 300ms ease-in-out;
+    }
+    .iconProcess {
+        font-size: 25px;
+        margin: 0 10px;
+    }
+}

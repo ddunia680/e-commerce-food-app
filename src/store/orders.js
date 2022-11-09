@@ -9,14 +9,26 @@ export const postData = createAsyncThunk(
             console.log(res.data);
         })
     }
-); 
+);
+
+export const pullOrders = createAsyncThunk(
+    'data/pullOrders',
+    () => {
+        return axios.get('/orders.json').then(res => {
+            console.log(res.data);
+            return res.data;
+        })
+    }
+)
 
 const orders =  createSlice({
     name: 'orders',
     initialState: {
         orderDate: {},
         loadingStatus: null,
-        error: null
+        error: null,
+        pulledOrders: {},
+        pullingStatus: null
     },
     extraReducers(builder) {
         builder
@@ -29,6 +41,18 @@ const orders =  createSlice({
         .addCase(postData.rejected, (state, action) => {
             state.loadingStatus = 'failed';
             state.error = action.error.message;
+        });
+
+        builder
+        .addCase(pullOrders.pending, (state, action) => {
+            state.pullingStatus = 'loading';
+        })
+        .addCase(pullOrders.fulfilled, (state, action) => {
+            state.pullingStatus = 'succeeded';
+            state.pulledOrders = action.payload;
+        })
+        .addCase(pullOrders.rejected, (state, action) => {
+            state.pullingStatus = 'failed';
         })
     }
 });

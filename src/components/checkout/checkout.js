@@ -10,6 +10,7 @@ import classes from './checkout.module.css';
 function Checkout(props) {
     const cart = useSelector(state => state.cartElements.cartElements);
     const totalPrice = useSelector(state => state.cartElements.totalPrice);
+    const userName = useSelector(state => state.Authenticate.userName);
     let status = useSelector(state => state.orders.loadingStatus);
     let error = useSelector(state => state.orders.error);
     let dispatch = useDispatch();
@@ -20,6 +21,7 @@ function Checkout(props) {
     const SendData = () => {
         let data = {
             ...values,
+            user: userName,
             totalPrice: totalPrice + 2.5
         };
         dispatch(postData(data)).then(res => {
