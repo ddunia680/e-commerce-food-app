@@ -54,10 +54,28 @@
     transition: all 300ms ease-in-out;
 }
 
+.processed {
+    background-color: rgb(117, 218, 117);
+    color: black;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    font-size: 17px;
+    transition: all 300ms ease-in-out;
+}
+
 .iconProcess {
     font-size: 40px;
     padding: 0 20px;
-} 
+}
+
+.iconProcessed {
+    font-size: 40px;
+    padding: 0 20px;
+    /* color: brown; */
+    border: 2px solid black;
+    border-radius: 50%;
+}
 
 @media (max-width: 600px) {
     .wrapper {
@@ -96,7 +114,19 @@
         color: rgb(166, 160, 160);
         transition: all 300ms ease-in-out;
     }
+    .processed {
+        padding: 5px 10px;
+        border: none;
+        border-radius: 5px;
+        font-size: 13px;
+        transition: all 300ms ease-in-out;
+    }
     .iconProcess {
+        font-size: 25px;
+        margin: 0 10px;
+    }
+
+    .iconProcessed {
         font-size: 25px;
         margin: 0 10px;
     }

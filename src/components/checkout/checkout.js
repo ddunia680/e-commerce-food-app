@@ -6,6 +6,7 @@ import {FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faThumbsUp } from '@fortawesome/free-solid-svg-icons';
 import { CLEARCART } from '../../store/cartElements';
 import { RESETSTATUS } from '../../store/orders';
+import { uid } from 'uid';
 
 import classes from './checkout.module.css';
 function Checkout(props) {
@@ -35,12 +36,14 @@ function Checkout(props) {
         valuesToPost = {...valuesToPost, [el.name]: el.val};
     });
    console.log(valuesToPost);
-
+    const recId = uid();
    const SendData = () => {
     let data = {
         ...valuesToPost,
         user: userName,
-        totalPrice: totalPrice + 2.5
+        totalPrice: totalPrice + 2.5,
+        recId: recId,
+        process: 'Process'
     };
     dispatch(postData(data)).then(res => {
          props.rmvCheck();

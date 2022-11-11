@@ -19,6 +19,23 @@ export const pullOrders = createAsyncThunk(
             return res.data;
         })
     }
+);
+
+export const PushProcessed = createAsyncThunk(
+    'data/pushProcessed',
+    (data) => {
+        return axios.post('/processed.json', data).then(res => {
+            console.log(res);
+            return res.data;
+        });
+    }
+)
+
+export const pullProcessed =  createAsyncThunk(
+    'data/proccessed',
+    () => {
+        return axios.get('/processed.json').then(res => res.data);
+    }
 )
 
 const orders =  createSlice({
@@ -28,7 +45,11 @@ const orders =  createSlice({
         loadingStatus: null,
         error: null,
         pulledOrders: {},
-        pullingStatus: null
+        pullingStatus: null,
+        pushProcessedState: null,
+        processedState: null,
+        processed: {}
+
     }, 
     reducers: {
         RESETSTATUS: (state, action) => {
@@ -59,6 +80,28 @@ const orders =  createSlice({
         })
         .addCase(pullOrders.rejected, (state, action) => {
             state.pullingStatus = 'failed';
+        });
+        builder
+        .addCase(PushProcessed.pending, (state, action) => {
+            state.pushProcessedState = 'loading';
+        })
+        .addCase(PushProcessed.fulfilled, (state, action) => {
+            state.pushProcessedState = 'succeeded';
+        })
+        .addCase(PushProcessed.rejected, (state, action) => {
+            state.pushProcessedState = 'failed';
+        });
+
+        builder
+        .addCase(pullProcessed.pending, (state, action) => {
+            state.processedState = 'loading'
+        })
+        .addCase(pullProcessed.fulfilled, (state, action) => {
+            state.processed = action.payload;
+            state.processedState = 'succeeded';
+        })
+        .addCase(pullProcessed.rejected, (state, action) => {
+            state.processedState = 'failed';
         })
     }
 });

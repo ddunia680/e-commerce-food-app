@@ -8,7 +8,7 @@ import { pullOrders } from '../../store/orders';
 const Orders = (props) => {
     let dispatch = useDispatch();
     let pulledOrders = useSelector(state => state.orders.pulledOrders);
-    console.log(pulledOrders);
+    // console.log(pulledOrders);
 
 
     useEffect(() => {
@@ -21,7 +21,7 @@ const Orders = (props) => {
             orders.push(pulledOrders[item]);
         }
     }
-    console.log(orders);
+    // console.log(orders);
     return (
         <div>
             <Toolbar/>
@@ -29,11 +29,11 @@ const Orders = (props) => {
                 {orders.map(el => {
                     let items = {};
                     for(let itm in el) {
-                        if(itm !== 'totalPrice' && itm !== 'user') {
+                        if(itm !== 'totalPrice' && itm !== 'user' && itm !== 'recId' && itm !== 'process') {
                             items = {...items, [itm]: el[itm]};
                         }
                     }
-                    return <OrderItem name={el.user} items={items} price={el.totalPrice} key={Math.random() * 100}/>
+                    return <OrderItem name={el.user} items={items} price={el.totalPrice} key={el.recId} process={el.process} recId={el.recId}/>
                 })}
                 {/* <OrderItem/> */}
             </div>
